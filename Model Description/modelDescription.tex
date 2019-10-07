@@ -1,0 +1,74 @@
+\documentclass{article}
+
+\title{Model Description}
+\begin{document}
+
+\maketitle
+
+\section{Model for CMPE 557 Final}
+\subsection{Parameters}
+\begin{enumerate}
+    \item $N$: Number of agents
+    \item $M$: Number of meanings
+    \item $m$: Memory size
+    \item $W$: Number of symbol
+\end{enumerate}
+
+\subsection{Interaction}
+Currently, a speaker and a listener agent are selected. Speaker agent selects a random meaning $\mu_{s}$. She checks her memory for that meaning: if no symbols are present, she randomly selects one and adds it to her memory. If there is at least one symbol in her memory for $\mu_{s}$, she probabilistically selects a symbol $\sigma$.
+
+She conveys $\sigma$ to the listener agent. Listener understands a meaning $\mu_{l}$ from symbol $\sigma$ with probability $p$
+\\
+\begin{equation}
+    p=\frac{k_{\sigma,\mu_{l}}}{k_{\sigma}}    
+\end{equation}
+
+
+where \\
+
+$k_{\sigma,\mu_{l}}=$ Number of times $\sigma$ is seen in agent's memory for $\mu_{l}$ \\
+
+$k_{\sigma}=$ Number of times $\sigma$ is seen in total in the agent's memory
+\\
+
+Then, magically, both parties learn what $\mu_{s}$ and $\mu_{l}$ are.
+If $\mu_{s}=\mu_{l}$, the interaction is a success. If not, it is a failure.
+
+\subsection{Memory updates}
+
+If the interaction is a success, both agents update their memory for $\mu_{s}=\mu_{l}$ with $\sigma$
+
+If the interaction is a failure, only the listener agent updates her memory for $\mu_{s}$ with $\sigma$
+
+For a memory with empty slots, updating the memory means putting the symbol on an empty memory slot. For a full memory, we mean writing the symbol in place of the memory slot that has not been updated for the longest time. 
+
+\section{New model considerations}
+
+The old model suffers from a deficiency: it assumes telepathic communication between the two agents. This makes us ask "Why do they even need a language then?"
+
+\subsection{Meanings as actions}
+
+If we interpret meanings as actions such as "Turn right!", "Don't go to east!", then the speaker can understand when the listener has not understood her. This assumes:
+
+\begin{enumerate}
+    \item There is no confusion or noise in transmission of symbols
+    \item At a time, there is only one listener(L) and one speaker(S)
+    \item If L understands S, she will do as S says
+\end{enumerate}
+
+The counter-positive statement of the second assumption is "If L doesn't do what S says, then L did not understand". Thus, S can know when L did \textbf{not} understand.
+
+S can't be sure that L understood S because it may be that L did what S told without actually understanding the symbol. L may be moving randomly.
+
+\subsubsection{How to know if L understood me}
+
+One way S can be sure that L understands her is by repeated communication. If S sends the same symbol (or maybe different symbols?) repeatedly and L does the intended action in all(or maybe most?) of them, then S can know L understands her.
+
+Another possibility:
+Let's look at the statement: "If L does what S says, she understood S". The counter-positive of this is "If L didn't understand S, she doesn't do what S says" When is this true?
+
+\subsubsection{How to know if I understood S}
+Let's take the point of view of L. How do we know if we understood someone? This is the case between a baby and her mother. Baby sends a symbol(crying) and mother does an action. Until the mother does the right action, baby keeps sending the symbol. Thus, again we have a repeated communication. 
+
+
+\end{document}
