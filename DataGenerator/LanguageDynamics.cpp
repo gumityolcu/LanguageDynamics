@@ -93,10 +93,13 @@ void MemorySpeakerUpdateBoth::FSpSuc(Agent& speaker, int m, int s)
 
 void MemorySpeakerUpdateBoth::FSpFail(Agent& speaker, int m_s, int s, int m_l)
 {
-    speaker.A(m_l,speaker.updateHistory[m_l].front())--;
-    speaker.updateHistory[m_l].pop();
-    speaker.updateHistory[m_l].push(s);
-    speaker.A(m_l,s)++;
+    if(m_l>-1)
+    {
+        speaker.A(m_l,speaker.updateHistory[m_l].front())--;
+        speaker.updateHistory[m_l].pop();
+        speaker.updateHistory[m_l].push(s);
+        speaker.A(m_l,s)++;
+    }
 }
 
 MemorySpeakerUpdateBoth::~MemorySpeakerUpdateBoth(){}

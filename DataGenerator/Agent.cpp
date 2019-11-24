@@ -77,7 +77,6 @@ std::pair<int,int> Agent::speak()
 int Agent::listen(int sigma)
 {
     std::uniform_int_distribution<int> unifCol(1,this->colsums(sigma));
-
     int rn=unifCol(this->rnd);
     int sum=0;
     int i;

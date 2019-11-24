@@ -15,6 +15,7 @@ public:
     ~Simulation();
     void runForIterations(int IT);
     void saveResults(std::string path="");
+    std::vector<Eigen::MatrixXi> getMatrices();
     void loadSimulation();
 
 };
