@@ -15,15 +15,20 @@ void Simulation::runForIterations(int IT)
 {
     for(int i=0;i<IT;i++)
     {
+        std::cout<<std::endl<<std::endl<<std::endl;
+        std::cout<<"Running at time "<<T<<std::endl<<std::endl;
         this->m->runOnce();
         this->T++;
-        std::cout<<"Running at time "<<T<<std::endl<<std::endl;
     }
 }
 
 void Simulation::saveResults(std::string path)
 {
-    std::string fname=this->m->toStr()+"|T="+std::to_string(this->T)+".txt";
+    std::string fname=path;
+    if(fname=="")
+    {
+        fname=this->m->toStr()+"|T="+std::to_string(this->T)+".txt";
+    }
     std::ofstream file;
     file.open(fname);
     file<<this->T<<"|";

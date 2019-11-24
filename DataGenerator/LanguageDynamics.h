@@ -4,7 +4,7 @@
 #include "Simulation.h"
 
 
-class SpeakerIncrementBoth: Model
+class SpeakerIncrementBoth: public Model
 {
 public:
     void FSpSuc(Agent& speaker, int m, int s);

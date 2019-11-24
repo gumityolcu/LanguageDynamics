@@ -90,6 +90,17 @@ int Agent::listen(int sigma)
 
 std::ostream & operator << (std::ostream &out, const Agent &x)
 {
-    out << x.A;
+    //out << x.A;
+    for(int r=0;r<x.A.rows();r++)
+    {
+        for(int c=0;c<x.A.cols();c++)
+        {
+            out<<x.A(r,c);
+            if((r<x.A.rows()-1)||(c<x.A.cols()-1))
+            {
+                out<<" ";
+            }
+        }
+    }
     return out;
 }

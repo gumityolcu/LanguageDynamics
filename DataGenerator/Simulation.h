@@ -14,7 +14,7 @@ public:
     Simulation(Model* m);
     ~Simulation();
     void runForIterations(int IT);
-    void saveResults(std::string path);
+    void saveResults(std::string path="");
     void loadSimulation();
 
 };
