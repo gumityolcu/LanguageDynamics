@@ -6,7 +6,7 @@
 
 // The model where speaker increments according to listener in both success and failure
 
-SpeakerIncrementBoth::SpeakerIncrementBoth(int N, int M, int S, int m):Model(N,M,S,m)
+SpeakerIncrementBoth::SpeakerIncrementBoth(int N, int M, int S):Model(N,M,S,0)
 {
     this->name="SpeakerIncrementBoth";
 }
@@ -26,11 +26,29 @@ SpeakerIncrementBoth::~SpeakerIncrementBoth(){}
 
 
 //===================================================================
+
+// The model where speaker increments according to listener in failure
+
+SpeakerIncrementFailure::SpeakerIncrementFailure(int N, int M, int S):Model(N,M,S,0)
+{
+    this->name="SpeakerIncrementFailure";
+}
+
+void SpeakerIncrementFailure::FSpFail(Agent& speaker, int m_s, int s, int m_l)
+{
+    speaker.A(m_l,s)++;
+}
+
+SpeakerIncrementFailure::~SpeakerIncrementFailure(){}
+
+
+//===================================================================
+
 /* The model where:
  * speaker increments according to listener in both success and failure
  * listener increments according to speaker in both success and failure
  */
-BothIncrementBoth::BothIncrementBoth(int N, int M, int S, int m):Model(N,M,S,m)
+BothIncrementBoth::BothIncrementBoth(int N, int M, int S):Model(N,M,S,0)
 {
     this->name="BothIncrementBoth";
 }
@@ -53,6 +71,35 @@ void BothIncrementBoth::FLisFail(Agent& listener, int m_s, int s, int m_l)
 }
 
 BothIncrementBoth::~BothIncrementBoth(){}
+
+
+//===================================================================
+
+/* The model where:
+ * The speaker updates memory according to the listener's action
+ */
+MemorySpeakerUpdateBoth::MemorySpeakerUpdateBoth(int N, int M, int S, int m):Model(N,M,S,m)
+{
+    this->name="MemorySpeakerUpdateBoth";
+}
+
+void MemorySpeakerUpdateBoth::FSpSuc(Agent& speaker, int m, int s)
+{
+    speaker.A(m,speaker.updateHistory[m].front())--;
+    speaker.updateHistory[m].pop();
+    speaker.updateHistory[m].push(s);
+    speaker.A(m,s)++;
+}
+
+void MemorySpeakerUpdateBoth::FSpFail(Agent& speaker, int m_s, int s, int m_l)
+{
+    speaker.A(m_l,speaker.updateHistory[m_l].front())--;
+    speaker.updateHistory[m_l].pop();
+    speaker.updateHistory[m_l].push(s);
+    speaker.A(m_l,s)++;
+}
+
+MemorySpeakerUpdateBoth::~MemorySpeakerUpdateBoth(){}
 
 
 //===================================================================
