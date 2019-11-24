@@ -10,7 +10,7 @@
 
 class Agent
 {
-private:
+public:
     // Integer association matrix
     Eigen::MatrixXi A;
     unsigned int seed;
@@ -22,8 +22,6 @@ private:
 
     std::vector<std::queue<int>> updateHistory;
     std::default_random_engine rnd;
-
-public:
     // Vanilla constuctor, should not be used
     Agent();
 

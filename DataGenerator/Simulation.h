@@ -3,7 +3,8 @@
 
 #include "Model.h"
 
-class Simulation {
+class Simulation
+{
 private:
     int T;
     Model* m;

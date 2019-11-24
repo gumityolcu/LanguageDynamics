@@ -2,16 +2,19 @@
 
 
 Model::Model(){}
-Model::Model(int N, int M, int S, std::string name)
+Model::Model(int N, int M, int S, int m)
 {
     std::random_device r;
     this->seed=r();
     this->rnd.seed(this->seed);
 
     this->N=N;
+    this->M=M;
+    this->S=S;
+    this->m=m;
     for(int i=0;i<N;i++)
     {
-        this->agents.emplace_back(Agent(M,S,0));
+        this->agents.emplace_back(Agent(M,S,m));
         for(int j=0;j<N;j++)
         {
             if(i!=j)
@@ -20,16 +23,28 @@ Model::Model(int N, int M, int S, std::string name)
             }
         }
     }
-    this->M=M;
-    this->S=S;
-    this->name=name;
 }
 Model::~Model(){}
+
+virtual void FSpSuc(Agent& speaker, int m, int s){return;}
+virtual void FLisSuc(Agent& listener, int m, int s){return;}
+virtual void FSpFail(Agent& speaker, int m_s, int s, int m_l){return;}
+virtual void FLisFail(Agent& listener, int m_s, int s, int m_l){return;}
+
+
+
+
 
 std::string Model::toStr()
 {
     std::string ret="";
-    ret+=this->name+"|"+std::to_string(this->N)+"|"+std::to_string(this->M)+"|"+std::to_string(this->S)
+    ret+=this->name+"|"+std::to_string(this->N)+"|"+std::to_string(this->M)+"|"+std::to_string(this->S)"|"+std::to_string(this->m);
+    return ret;
+}
+
+int Model::getN()
+{
+    return this->N;
 }
 
 void Model::runOnce()
@@ -44,6 +59,12 @@ void Model::runOnce()
         this->interact(sel.first,sel.second);
     }
 }
+
+Agent& Model::getAgent(int index)
+{
+    return this->agents[index];
+}
+
 
 
 bool Model::interact(Agent& speaker, Agent& listener)
