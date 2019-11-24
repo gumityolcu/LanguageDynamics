@@ -26,7 +26,13 @@ Model::Model(int N, int M, int S, std::string name)
 }
 Model::~Model(){}
 
-void Model::runOnce(int IT)
+std::string Model::toStr()
+{
+    std::string ret="";
+    ret+=this->name+"|"+std::to_string(this->N)+"|"+std::to_string(this->M)+"|"+std::to_string(this->S)
+}
+
+void Model::runOnce()
 {
     for(int boundary=this->combinations.size(); boundary>0; boundary--)
     {
