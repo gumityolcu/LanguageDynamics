@@ -3,13 +3,14 @@
 #include <utility>
 #include <vector>
 #include <random>
+#include <iostream>
 
 class Agent
 {
     public:
         // Integer association matrix
         Eigen::MatrixXi A;
-
+        unsigned int seed;
         // Integer vectors for keeping track of sums of columns and rows
         Eigen::VectorXi rowsums;
         //Eigen::VectorXd rowsumd;
@@ -28,7 +29,8 @@ class Agent
         // Constructor with M = # of meanings, S = # of symbols and memory = memory size. Use memory=-1 for infinite memory
         Agent(int M, int S, int memory=-1);
         ~Agent();
+
         std::pair<int,int> speak();
         int listen(int sigma);
-
+        friend std::ostream & operator << (std::ostream &out, const Agent &x);
 };

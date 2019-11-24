@@ -9,7 +9,8 @@ Agent::Agent()
 Agent::Agent(int M, int S, int memory)
 {
     std::random_device r;
-    this->rnd.seed(r());
+    this->seed=r();
+    this->rnd.seed(this->seed);
     std::uniform_int_distribution<int> unifS(0,S-1);
 
     int incBase;
@@ -85,4 +86,10 @@ int Agent::listen(int sigma)
         sum += this->A(i,sigma);
     }
     return i-1;
+}
+
+std::ostream & operator << (std::ostream &out, const Agent &x)
+{
+    out << x.A;
+    return out;
 }
