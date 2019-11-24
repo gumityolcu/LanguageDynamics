@@ -6,10 +6,11 @@
 
 // The model where speaker increments according to listener in both success and failure
 
-SpeakerIncrementBoth::SpeakerIncrementBoth()
+SpeakerIncrementBoth::SpeakerIncrementBoth(int N, int M, int S, int m):Model(N,M,S,m)
 {
     this->name="SpeakerIncrementBoth";
 }
+
 
 void SpeakerIncrementBoth::FSpSuc(Agent& speaker, int m, int s)
 {
@@ -27,7 +28,7 @@ SpeakerIncrementBoth::~SpeakerIncrementBoth(){}
 //===================================================================
 // The model where speaker increments according to listener in both success and failure
 
-BothIncrementBoth::BothIncrementBoth()
+BothIncrementBoth::BothIncrementBoth(int N, int M, int S, int m):Model(N,M,S,m)
 {
     this->name="BothIncrementBoth";
 }
