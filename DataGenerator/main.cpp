@@ -17,7 +17,7 @@ int main() {
     for(int rea=0;rea<REALISATIONS;rea++)
     {
         cout<<"REALISATION "<<rea<<endl;
-        MemoryBothUpdateBoth model(10,10,10,200);
+        MemoryBothUpdateBoth model(10,10,10,5);
         Simulation s(&model);
         s.runForIterations(5000);
         s.saveResults();

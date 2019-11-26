@@ -6,7 +6,7 @@
 
 // The model where speaker increments according to listener in both success and failure
 
-SpeakerIncrementBoth::SpeakerIncrementBoth(int N, int M, int S):Model(N,M,S,0)
+SpeakerIncrementBoth::SpeakerIncrementBoth(int N, int M, int S):Model(N,M,S)
 {
     this->name="SpeakerIncrementBoth";
 }
@@ -15,7 +15,6 @@ SpeakerIncrementBoth::SpeakerIncrementBoth(int N, int M, int S):Model(N,M,S,0)
 void SpeakerIncrementBoth::FSpSuc(Agent& speaker, int m, int s)
 {
     speaker.incA(m,s);
-
 }
 
 void SpeakerIncrementBoth::FSpFail(Agent& speaker, int m_s, int s, int m_l)
@@ -30,7 +29,7 @@ SpeakerIncrementBoth::~SpeakerIncrementBoth(){}
 
 // The model where speaker increments according to listener in failure
 
-SpeakerIncrementFailure::SpeakerIncrementFailure(int N, int M, int S):Model(N,M,S,0)
+SpeakerIncrementFailure::SpeakerIncrementFailure(int N, int M, int S):Model(N,M,S)
 {
     this->name="SpeakerIncrementFailure";
 }
@@ -49,7 +48,7 @@ SpeakerIncrementFailure::~SpeakerIncrementFailure(){}
  * speaker increments according to listener in both success and failure
  * listener increments according to speaker in both success and failure
  */
-BothIncrementBoth::BothIncrementBoth(int N, int M, int S):Model(N,M,S,0)
+BothIncrementBoth::BothIncrementBoth(int N, int M, int S):Model(N,M,S)
 {
     this->name="BothIncrementBoth";
 }
@@ -86,20 +85,14 @@ MemorySpeakerUpdateBoth::MemorySpeakerUpdateBoth(int N, int M, int S, int m):Mod
 
 void MemorySpeakerUpdateBoth::FSpSuc(Agent& speaker, int m, int s)
 {
-    speaker.decA(m,speaker.updateHistory[m].front());
-    speaker.updateHistory[m].pop();
-    speaker.updateHistory[m].push(s);
-    speaker.incA(m,s);
+    speaker.updateMemory(m, s);
 }
 
 void MemorySpeakerUpdateBoth::FSpFail(Agent& speaker, int m_s, int s, int m_l)
 {
     if(m_l>-1)
     {
-        speaker.decA(m_l,speaker.updateHistory[m_l].front());
-        speaker.updateHistory[m_l].pop();
-        speaker.updateHistory[m_l].push(s);
-        speaker.incA(m_l,s);
+        speaker.updateMemory(m_l, s);
     }
 }
 
@@ -115,46 +108,22 @@ MemoryBothUpdateBoth::MemoryBothUpdateBoth(int N, int M, int S, int m):Model(N,M
 
 void MemoryBothUpdateBoth::FSpSuc(Agent& speaker, int m, int s)
 {
-    if(speaker.updateHistory[m].size()>0)
-    {
-        speaker.decA(m,speaker.updateHistory[m].front());
-        speaker.updateHistory[m].pop();
-    }
-    speaker.updateHistory[m].push(s);
-    speaker.incA(m,s);
+    speaker.updateMemory(m, s);
 }
 
 void MemoryBothUpdateBoth::FSpFail(Agent& speaker, int m_s, int s, int m_l)
 {
-    if(speaker.updateHistory[m_l].size()>0)
-    {
-        speaker.decA(m_l,speaker.updateHistory[m_l].front());
-        speaker.updateHistory[m_l].pop();
-    }
-    speaker.updateHistory[m_l].push(s);
-    speaker.incA(m_l,s);
+    speaker.updateMemory(m_l, s);
 }
 
 
 void MemoryBothUpdateBoth::FLisSuc(Agent& listener, int m, int s)
 {
-    if(listener.updateHistory[m].size()>0)
-    {
-        listener.decA(m,listener.updateHistory[m].front());
-        listener.updateHistory[m].pop();
-    }
-    listener.updateHistory[m].push(s);
-    listener.incA(m,s);
+    listener.updateMemory(m, s);
 }
 void MemoryBothUpdateBoth::FLisFail(Agent& listener, int m_s, int s, int m_l)
 {
-        if(listener.updateHistory[m_s].size()>0)
-        {
-            listener.decA(m_s,listener.updateHistory[m_s].front());
-            listener.updateHistory[m_s].pop();
-        }
-        listener.updateHistory[m_s].push(s);
-        listener.incA(m_s,s);
+    listener.updateMemory(m_s,s);
 }
 
 MemoryBothUpdateBoth::~MemoryBothUpdateBoth(){}

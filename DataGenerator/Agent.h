@@ -16,13 +16,10 @@ private:
     unsigned int seed;
     // Integer vectors for keeping track of sums of columns and rows
     std::vector<int> rowsums;
-    //Eigen::VectorXd rowsumd;
     std::vector<int> colsums;
-    bool memory=false;
-    //Eigen::VectorXd colsumd;
-
-public:
     std::vector<std::queue<int>> updateHistory;
+    int memory;
+public:
     std::default_random_engine rnd;
     // Vanilla constuctor, should not be used
     Agent();
@@ -30,17 +27,19 @@ public:
     // Constructor with M = # of meanings, S = # of symbols and integer = whether the matrix values are constrained to be integers
     //Agent(int M, int S, bool integer);
 
-    // Constructor with M = # of meanings, S = # of symbols and memory = memory size. Use memory=-1 for infinite memory
-    Agent(int M, int S, int memory=-1);
+    // Constructor with M = # of meanings, S = # of symbols and memory = memory size. Use memory=0 for infinite memory.
+    Agent(int M, int S, int memory, int init);
     ~Agent();
 
     std::pair<int,int> speak();
     int listen(int sigma);
     int getA(int row, int col);
     void setA(int row, int col, int val);
+    bool hasMemory();
     void incA(int row, int col);
     void decA(int row, int col);
     Eigen::MatrixXi getMatrix();
+    void updateMemory(int m, int s);
     friend std::ostream & operator << (std::ostream &out, const Agent &x);
 };
 

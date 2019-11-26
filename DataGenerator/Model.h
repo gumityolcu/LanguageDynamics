@@ -9,7 +9,7 @@ protected:
     int N; // # of agents
     int M; // # of meanings
     int S; // # of symbols
-    int m; // memory size
+    int memory; // memory size
     std::vector<Agent> agents;
     std::string name="plain";
     std::vector<std::pair<int,int>> combinations;
@@ -21,6 +21,7 @@ protected:
     virtual void FLisSuc(Agent& listener, int m, int s);
     virtual void FSpFail(Agent& speaker, int m_s, int s, int m_l);
     virtual void FLisFail(Agent& listener, int m_s, int s, int m_l);
+
 public:
     int getN();
     Agent& getAgent(int index);
@@ -28,7 +29,7 @@ public:
     bool interact(int speaker, int listener);
     std::string toStr();
     Model();
-    Model(int N, int M, int S, int m);
+    Model(int N, int M, int S, int memory=0, int init=10);
     ~Model();
 
 };
