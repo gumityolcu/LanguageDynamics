@@ -12,6 +12,7 @@ Model::Model(int N, int M, int S, int m)
     this->M=M;
     this->S=S;
     this->m=m;
+
     for(int i=0;i<N;i++)
     {
         this->agents.emplace_back(Agent(M,S,m));
@@ -95,3 +96,5 @@ bool Model::interact(int speaker, int listener)
 {
     return this->interact(this->agents[speaker],this->agents[listener]);
 }
+
+

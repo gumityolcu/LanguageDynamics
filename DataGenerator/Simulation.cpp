@@ -44,7 +44,7 @@ std::vector<Eigen::MatrixXi> Simulation::getMatrices()
     std::vector<Eigen::MatrixXi> ret;
     for(int i=0; i<this->m->getN();i++)
     {
-        ret.push_back(this->m->getAgent(i).A);
+        ret.push_back(this->m->getAgent(i).getMatrix());
     }
     return ret;
 }

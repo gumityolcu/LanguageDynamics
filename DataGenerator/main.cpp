@@ -10,21 +10,28 @@ double fitnessBetweenAgents(pair<MatrixXd,MatrixXd> m1, pair<MatrixXd,MatrixXd> 
 double populationFitness(vector<pair<MatrixXd,MatrixXd>> pop);
 MatrixXd normalize(MatrixXi M);
 vector<pair<MatrixXd,MatrixXd>> generateMatrices(vector<MatrixXi> M);
+
+
 int main() {
     double score=0;
     for(int rea=0;rea<REALISATIONS;rea++)
     {
-        cout<<"REALISATION "<<rea;
-        MemorySpeakerUpdateBoth model(20,5,5,5);
+        cout<<"REALISATION "<<rea<<endl;
+        MemoryBothUpdateBoth model(10,10,10,200);
         Simulation s(&model);
-        s.runForIterations(500);
+        s.runForIterations(5000);
         s.saveResults();
         vector<MatrixXi> pop=s.getMatrices();
+        for(int i=0;i<pop.size();i++)
+        {
+            cout<<pop[i]<<endl<<endl<<"====="<<endl<<endl;
+        }
         score+=populationFitness(generateMatrices(pop));
     }
     score=score/REALISATIONS;
     cout<<"Population score : "<<score;
 }
+
 MatrixXd normalize(MatrixXi M)
 {
     int sum;

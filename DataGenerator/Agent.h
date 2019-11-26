@@ -10,16 +10,18 @@
 
 class Agent
 {
-public:
+private:
     // Integer association matrix
     Eigen::MatrixXi A;
     unsigned int seed;
     // Integer vectors for keeping track of sums of columns and rows
-    Eigen::VectorXi rowsums;
+    std::vector<int> rowsums;
     //Eigen::VectorXd rowsumd;
-    Eigen::VectorXi colsums;
+    std::vector<int> colsums;
+    bool memory=false;
     //Eigen::VectorXd colsumd;
 
+public:
     std::vector<std::queue<int>> updateHistory;
     std::default_random_engine rnd;
     // Vanilla constuctor, should not be used
@@ -34,6 +36,11 @@ public:
 
     std::pair<int,int> speak();
     int listen(int sigma);
+    int getA(int row, int col);
+    void setA(int row, int col, int val);
+    void incA(int row, int col);
+    void decA(int row, int col);
+    Eigen::MatrixXi getMatrix();
     friend std::ostream & operator << (std::ostream &out, const Agent &x);
 };
 

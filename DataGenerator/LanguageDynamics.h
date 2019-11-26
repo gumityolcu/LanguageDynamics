@@ -49,4 +49,16 @@ public:
     ~MemorySpeakerUpdateBoth();
 };
 
+class MemoryBothUpdateBoth: public Model
+{
+public:
+    void FSpSuc(Agent& speaker, int m, int s);
+    void FLisSuc(Agent& listener, int m, int s);
+    void FSpFail(Agent& speaker, int m_s, int s, int m_l);
+    void FLisFail(Agent& listener, int m_s, int s, int m_l);
+
+    MemoryBothUpdateBoth(int N, int M, int S, int m);
+    MemoryBothUpdateBoth();
+    ~MemoryBothUpdateBoth();
+};
 #endif //LANGUAGEDYNAMICS_LANGUAGEDYNAMICS_H
