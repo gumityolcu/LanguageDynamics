@@ -130,3 +130,22 @@ MemoryBothUpdateBoth::~MemoryBothUpdateBoth(){}
 
 
 //===================================================================
+
+SpeakerIncrementDecrement::SpeakerIncrementDecrement(int N, int M, int S, int inc, int dec):Model(N,M,S)
+{
+    this->increment=inc;
+    this->decrement=dec;
+    this->name="SpeakerIncrementDecrement";
+}
+
+void SpeakerIncrementDecrement::FSpSuc(Agent& speaker, int m, int s)
+{
+    speaker.setA(m,s,speaker.getA(m,s)+this->increment);
+}
+
+void SpeakerIncrementDecrement::FSpFail(Agent& speaker, int m_s, int s, int m_l)
+{
+    speaker.setA(m_l,s,std::max(0,speaker.getA(m_l,s)-this->decrement));
+}
+
+SpeakerIncrementDecrement::~SpeakerIncrementDecrement() {}

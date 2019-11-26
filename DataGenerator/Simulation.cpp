@@ -21,7 +21,7 @@ void Simulation::runForIterations(int IT)
     }
 }
 
-void Simulation::saveResults(std::string path)
+void Simulation::saveState(std::string path)
 {
     std::string fname=path;
     if(fname=="")

@@ -4,6 +4,7 @@
 Model::Model(){}
 Model::Model(int N, int M, int S, int memory, int init)
 {
+    // RANDOMIIIISE!
     std::random_device r;
     this->seed=r();
     this->rnd.seed(this->seed);
@@ -15,11 +16,13 @@ Model::Model(int N, int M, int S, int memory, int init)
 
     for(int i=0;i<N;i++)
     {
+        // Generate agents
         this->agents.emplace_back(Agent(M,S,memory,init));
         for(int j=0;j<N;j++)
         {
             if(i!=j)
             {
+                //Generate combinations of agents
                 this->combinations.emplace_back(std::pair<int,int>(i,j));
             }
         }
@@ -27,7 +30,7 @@ Model::Model(int N, int M, int S, int memory, int init)
 }
 Model::~Model(){}
 
-// Empty update functions, these will be overridden by actual model classes
+// Empty update functions, these will be overridden by actual model classes inheriting from this class
 void Model::FSpSuc(Agent& speaker, int m, int s){return;}
 void Model::FLisSuc(Agent& listener, int m, int s){return;}
 void Model::FSpFail(Agent& speaker, int m_s, int s, int m_l){return;}
@@ -47,6 +50,7 @@ int Model::getN()
 
 void Model::runOnce()
 {
+    // Exhaust list by randomly selecting. At the end, the list will be shuffled and ready for reuse
     for(int boundary=this->combinations.size(); boundary>0; boundary--)
     {
         std::uniform_int_distribution<int> unif(0,boundary-1);
@@ -63,16 +67,20 @@ Agent& Model::getAgent(int index)
     return this->agents[index];
 }
 
-
-
 bool Model::interact(Agent& speaker, Agent& listener)
 {
     std::pair<int,int> fromSpeaker;
     int m_s,sigma,m_l;
+    // Let the speaker speak
     fromSpeaker=speaker.speak();
+
     m_s=fromSpeaker.first;
     sigma=fromSpeaker.second;
+
+    // Let the listener listen
     m_l=listener.listen(sigma);
+
+    // Do what the model says
     if(m_s==m_l)
     {
         this->FSpSuc(speaker, m_s, sigma);
@@ -83,6 +91,7 @@ bool Model::interact(Agent& speaker, Agent& listener)
         this->FSpFail(speaker, m_s, sigma, m_l);
         this->FLisFail(listener, m_s, sigma, m_l);
     }
+
     return (m_s==m_l);
 }
 

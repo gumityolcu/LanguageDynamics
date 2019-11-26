@@ -17,10 +17,10 @@ int main() {
     for(int rea=0;rea<REALISATIONS;rea++)
     {
         cout<<"REALISATION "<<rea<<endl;
-        MemoryBothUpdateBoth model(10,10,10,5);
+        SpeakerIncrementFailure model(10,10,10);
         Simulation s(&model);
-        s.runForIterations(5000);
-        s.saveResults();
+        s.runForIterations(1000);
+        s.saveState();
         vector<MatrixXi> pop=s.getMatrices();
         for(int i=0;i<pop.size();i++)
         {

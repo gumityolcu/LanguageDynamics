@@ -8,10 +8,13 @@ Agent::Agent()
 
 Agent::Agent(int M, int S, int memory=0, int init=10)
 {
+
     std::random_device r;
     this->seed=r();
-    this->memory=memory;
     this->rnd.seed(this->seed);
+
+    this->memory=memory;
+
     std::uniform_int_distribution<int> unifS(0,S-1);
 
     int incBase;
@@ -24,6 +27,7 @@ Agent::Agent(int M, int S, int memory=0, int init=10)
         }
         this->updateHistory.resize(M);
     }
+
     incBase=init;
 
     this->A=Eigen::MatrixXi::Zero(M,S);
@@ -37,11 +41,15 @@ Agent::Agent(int M, int S, int memory=0, int init=10)
         {
             // Select a random symbol and increment association
             int c=unifS(this->rnd);
-            this->incA(r,c);
+
+            // Increment matrix and if needed, memory structure
             if(memory>0)
             {
-                // Update the memory history if necessary
-                this->updateHistory[r].push(c);
+                this->updateMemory(r,c);
+            }
+            else
+            {
+                this->incA(r,c);
             }
         }
     }
@@ -65,42 +73,44 @@ Agent::~Agent(){}
 
 std::pair<int,int> Agent::speak()
 {
+    // Uniform distribution between 0 and M-1
     std::uniform_int_distribution<int> unifM(0,this->A.rows()-1);
 
+    // We will return ret
+    // Ret will be of form <meaning, symbol>
     std::pair<int,int> ret;
 
+    // Select meaning
     ret.first=unifM(this->rnd);
 
-    /*if(this->rowsums[ret.first]==0)
+    // If the model contains instructions to decrease associations, we may have all zeroes for a selected meaning
+    // For now, we select a random symbol in this case and update A and memory accordingly.
+    if(this->rowsums[ret.first]==0)
     {
         std::uniform_int_distribution<int> unifS(0,this->A.cols()-1);
         int symbol=unifS(rnd);
-        if(symbol<0)
-        {
-            int a;
-        }
 
-        if(this->memory)
+        if(this->memory>0)
         {
-            //If model contains memory
-            //NOTE
-            if(this->updateHistory[ret.first].size()>0)
-            {
-                this->decA(ret.first,this->updateHistory[ret.first].front());
-                this->updateHistory[ret.first].pop();
-            }
-            this->updateHistory[ret.first].push(symbol);
+            updateMemory(ret.first,symbol);
         }
-        this->incA(ret.first, symbol);
-    }*/
+        else
+        {
+            this->incA(ret.first, symbol);
+        }
+    }
+
     std::uniform_int_distribution<int> unifRow(1,this->rowsums[ret.first]);
+    // Select a number from 1 to the rowsum
     int rn=unifRow(this->rnd);
     int sum=0;
     int i;
+    // Sum the numbers in the row until you pass the selected random number
     for(i=0;(i<this->A.cols())&&(rn>sum);i++)
     {
         sum += this->A(ret.first,i);
     }
+    // Choose the previous column's symbol
     ret.second = i-1;
 
     return ret;
@@ -108,10 +118,10 @@ std::pair<int,int> Agent::speak()
 
 int Agent::listen(int sigma)
 {
-    // NOTE DELETE THIS PART!!!!!!!!!!!!!!!!!!!!! THIS IS A HACK!!!
+    // We can have all zeroes for a symbol in any model. In this case, we select a random symbol
+    // and update the internal state accordingly for now
     if(this->colsums[sigma]==0)
     {
-        //If can't find meaning for the symbol, randomly select one meaning and change internal state accordingly
         std::uniform_int_distribution<int> unifM(0,this->A.rows()-1);
         int mu=unifM(rnd);
 
@@ -124,7 +134,7 @@ int Agent::listen(int sigma)
             this->incA(mu,sigma);
         }
     }
-
+    // Select meaning according to column probability distribution. Consult speak() for details
     std::uniform_int_distribution<int> unifCol(1,this->colsums[sigma]);
     int rn=unifCol(this->rnd);
     int sum=0;
@@ -187,6 +197,7 @@ Eigen::MatrixXi Agent::getMatrix()
 
 void Agent::updateMemory(int m, int s)
 {
+    // If the memory isn't full, we are not overwriting anything
     if(this->updateHistory[m].size()==this->memory)
     {
         this->decA(m,this->updateHistory[m].front());

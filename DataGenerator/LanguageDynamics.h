@@ -3,6 +3,7 @@
 
 #include "Simulation.h"
 
+// THIS FILE IS FOR ACCUMULATING DIFFERENT CLASSES(MODELS)
 
 class SpeakerIncrementBoth: public Model
 {
@@ -61,4 +62,20 @@ public:
     MemoryBothUpdateBoth();
     ~MemoryBothUpdateBoth();
 };
+
+
+class SpeakerIncrementDecrement:public Model
+{
+public:
+    int increment;
+    int decrement;
+    void FSpSuc(Agent& speaker, int m, int s);
+    void FSpFail(Agent& speaker, int m_s, int s, int m_l);
+
+    SpeakerIncrementDecrement(int N, int M, int S, int inc, int dec);
+    SpeakerIncrementDecrement();
+    ~SpeakerIncrementDecrement();
+};
+
+
 #endif //LANGUAGEDYNAMICS_LANGUAGEDYNAMICS_H
