@@ -11,7 +11,7 @@ double populationFitness(vector<pair<MatrixXd,MatrixXd>> pop);
 MatrixXd normalize(MatrixXi M);
 vector<pair<MatrixXd,MatrixXd>> generateMatrices(vector<MatrixXi> M);
 
-
+// DATA ANALYSER WILL BE A SEPERATE PROJECT!! ALL THIS IS FOR FAST DEBUGGING AND VERIFICATION
 int main() {
     double score=0;
     for(int rea=0;rea<REALISATIONS;rea++)
