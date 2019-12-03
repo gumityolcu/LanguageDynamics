@@ -36,6 +36,10 @@ void Simulation::saveState(std::string path) {
     file << this->T << " " << this->m->getN() << " " << this->m->getM() << " " << this->m->getS() << " ";
     for (int i = 0; i < this->m->getN(); i++) {
         file << this->m->getAgent(i);
+        if(i<this->m->getN()-1)
+        {
+            file<<" ";
+        }
     }
     file << "END";
     file.close();
