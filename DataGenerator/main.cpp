@@ -16,10 +16,10 @@ int main() {
     double score=0;
     for(int rea=0;rea<REALISATIONS;rea++)
     {
-        cout<<"REALISATION "<<rea<<endl;
-        SpeakerIncrementFailure model(10,10,10);
+        SpeakerFailureIncrement model(3, 2, 2);
         Simulation s(&model);
-        s.runForIterations(1000);
+        cout<<"REALISATION "<<rea<<endl;
+        s.runForIterations(50);
         s.saveState();
         vector<MatrixXi> pop=s.getMatrices();
         for(int i=0;i<pop.size();i++)
@@ -27,6 +27,15 @@ int main() {
             cout<<pop[i]<<endl<<endl<<"====="<<endl<<endl;
         }
         score+=populationFitness(generateMatrices(pop));
+    }
+    Model temp(3,2,2);
+    Simulation k(&temp);
+    k.loadState("SpeakerFailureIncrement|3|2|2|0|T=50.txt");
+    cout<<endl<<endl<<endl<<"EYYYYYYYYYYYYYYYYYYYYY"<<endl<<endl<<endl<<endl<<endl;
+    vector<MatrixXi> pop=k.getMatrices();
+    for(int i=0;i<pop.size();i++)
+    {
+        cout<<pop[i]<<endl<<endl<<"====="<<endl<<endl;
     }
     score=score/REALISATIONS;
     cout<<"Population score : "<<score;

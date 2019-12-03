@@ -3,78 +3,109 @@
 
 #include "Simulation.h"
 
+/*
+ * This file contains definitions of various models.
+ *
+ * The naming convention is as follows:
+ *
+ * The first word denotes who acts: this can be "Speaker", "Listener" or "Both"
+ * The second word denotes when the acter(s) acts(act): This can be "Failure", "Success" or "Both"
+ * The third word denotes the action: "Increment", "Decrement", "IncrementDecrement" etc.
+ *
+ * If the model includes memory, these three words are preceded by the word "Memory" and
+ * the last word is "Updates" because memory can only be updated.
+ *
+ * Notice that this is not strict as there can be names like "SpeakerSuccessIncrementFailureDecrement" or "MemorySpeakerSuccessUpdateListenerSuccessUpdate"
+ */
+
 // THIS FILE IS FOR ACCUMULATING DIFFERENT CLASSES(MODELS)
 
-class SpeakerIncrementBoth: public Model
-{
+class SpeakerBothIncrement : public Model {
 public:
-    void FSpSuc(Agent& speaker, int m, int s);
-    void FSpFail(Agent& speaker, int m_s, int s, int m_l);
+    void SpeakerSuccess(Agent &speaker, int m, int s);
 
-    SpeakerIncrementBoth(int N, int M, int S);
-    SpeakerIncrementBoth();
-    ~SpeakerIncrementBoth();
+    void SpeakerFailure(Agent &speaker, int m_s, int s, int m_l);
+
+    SpeakerBothIncrement(int N, int M, int S);
+
+    SpeakerBothIncrement();
+
+    ~SpeakerBothIncrement();
 };
 
-class SpeakerIncrementFailure: public Model
-{
+class SpeakerFailureIncrement : public Model {
 public:
-    void FSpFail(Agent& speaker, int m_s, int s, int m_l);
+    void SpeakerFailure(Agent &speaker, int m_s, int s, int m_l);
 
-    SpeakerIncrementFailure(int N, int M, int S);
-    SpeakerIncrementFailure();
-    ~SpeakerIncrementFailure();
+    SpeakerFailureIncrement(int N, int M, int S);
+
+    SpeakerFailureIncrement();
+
+    ~SpeakerFailureIncrement();
 };
 
-class BothIncrementBoth: public Model
-{
+class BothBothIncrement : public Model {
 public:
-    void FSpSuc(Agent& speaker, int m, int s);
-    void FLisSuc(Agent& listener, int m, int s);
-    void FSpFail(Agent& speaker, int m_s, int s, int m_l);
-    void FLisFail(Agent& listener, int m_s, int s, int m_l);
+    void SpeakerSuccess(Agent &speaker, int m, int s);
 
-    BothIncrementBoth(int N, int M, int S);
-    BothIncrementBoth();
-    ~BothIncrementBoth();
+    void ListenerSuccess(Agent &listener, int m, int s);
+
+    void SpeakerFailure(Agent &speaker, int m_s, int s, int m_l);
+
+    void ListenerFailure(Agent &listener, int m_s, int s, int m_l);
+
+    BothBothIncrement(int N, int M, int S);
+
+    BothBothIncrement();
+
+    ~BothBothIncrement();
 };
 
-class MemorySpeakerUpdateBoth: public Model
-{
+class MemorySpeakerBothUpdate : public Model {
 public:
-    void FSpSuc(Agent& speaker, int m, int s);
-    void FSpFail(Agent& speaker, int m_s, int s, int m_l);
+    void SpeakerSuccess(Agent &speaker, int m, int s);
 
-    MemorySpeakerUpdateBoth(int N, int M, int S, int m);
-    MemorySpeakerUpdateBoth();
-    ~MemorySpeakerUpdateBoth();
+    void SpeakerFailure(Agent &speaker, int m_s, int s, int m_l);
+
+    MemorySpeakerBothUpdate(int N, int M, int S, int m);
+
+    MemorySpeakerBothUpdate();
+
+    ~MemorySpeakerBothUpdate();
 };
 
-class MemoryBothUpdateBoth: public Model
-{
+class MemoryBothBothUpdate : public Model {
 public:
-    void FSpSuc(Agent& speaker, int m, int s);
-    void FLisSuc(Agent& listener, int m, int s);
-    void FSpFail(Agent& speaker, int m_s, int s, int m_l);
-    void FLisFail(Agent& listener, int m_s, int s, int m_l);
+    void SpeakerSuccess(Agent &speaker, int m, int s);
 
-    MemoryBothUpdateBoth(int N, int M, int S, int m);
-    MemoryBothUpdateBoth();
-    ~MemoryBothUpdateBoth();
+    void ListenerSuccess(Agent &listener, int m, int s);
+
+    void SpeakerFailure(Agent &speaker, int m_s, int s, int m_l);
+
+    void ListenerFailure(Agent &listener, int m_s, int s, int m_l);
+
+    MemoryBothBothUpdate(int N, int M, int S, int m);
+
+    MemoryBothBothUpdate();
+
+    ~MemoryBothBothUpdate();
 };
 
 
-class SpeakerIncrementDecrement:public Model
-{
+class SpeakerSuccessIncrementFailureDecrement : public Model {
 public:
     int increment;
     int decrement;
-    void FSpSuc(Agent& speaker, int m, int s);
-    void FSpFail(Agent& speaker, int m_s, int s, int m_l);
 
-    SpeakerIncrementDecrement(int N, int M, int S, int inc, int dec);
-    SpeakerIncrementDecrement();
-    ~SpeakerIncrementDecrement();
+    void SpeakerSuccess(Agent &speaker, int m, int s);
+
+    void SpeakerFailure(Agent &speaker, int m_s, int s, int m_l);
+
+    SpeakerSuccessIncrementFailureDecrement(int N, int M, int S, int inc, int dec);
+
+    SpeakerSuccessIncrementFailureDecrement();
+
+    ~SpeakerSuccessIncrementFailureDecrement();
 };
 
 
