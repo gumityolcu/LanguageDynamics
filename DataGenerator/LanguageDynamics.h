@@ -18,8 +18,6 @@
  * Notice that this is not strict as there can be names like "SpeakerSuccessIncrementFailureDecrement" or "MemorySpeakerSuccessUpdateListenerSuccessUpdate"
  */
 
-// THIS FILE IS FOR ACCUMULATING DIFFERENT CLASSES(MODELS)
-
 class SpeakerBothIncrement : public Model {
 public:
     void SpeakerSuccess(Agent &speaker, int m, int s);
@@ -61,6 +59,25 @@ public:
     ~BothBothIncrement();
 };
 
+class SpeakerSuccessIncrementFailureDecrement : public Model {
+public:
+    int increment;
+    int decrement;
+
+    void SpeakerSuccess(Agent &speaker, int m, int s);
+
+    void SpeakerFailure(Agent &speaker, int m_s, int s, int m_l);
+
+    SpeakerSuccessIncrementFailureDecrement(int N, int M, int S, int inc, int dec);
+
+    SpeakerSuccessIncrementFailureDecrement();
+
+    ~SpeakerSuccessIncrementFailureDecrement();
+};
+
+
+//Models including memory
+
 class MemorySpeakerBothUpdate : public Model {
 public:
     void SpeakerSuccess(Agent &speaker, int m, int s);
@@ -91,21 +108,42 @@ public:
     ~MemoryBothBothUpdate();
 };
 
-
-class SpeakerSuccessIncrementFailureDecrement : public Model {
+class MemorySpeakerSuccessUpdate : public Model {
 public:
-    int increment;
-    int decrement;
+    void SpeakerSuccess(Agent &speaker, int m, int s);
 
+    MemorySpeakerSuccessUpdate(int N, int M, int S, int m);
+
+    ~MemorySpeakerSuccessUpdate();
+};
+
+class MemorySpeakerSuccessListenerBothUpdate : public Model {
+public:
+    void SpeakerSuccess(Agent &speaker, int m, int s);
+
+    void ListenerSuccess(Agent &listener, int m, int s);
+
+    void ListenerFailure(Agent &listener, int m_s, int s, int m_l);
+
+    MemorySpeakerSuccessListenerBothUpdate(int N, int M, int S, int m);
+
+    ~MemorySpeakerSuccessListenerBothUpdate();
+};
+
+
+class MemorySpeakerBothListenerSuccessUpdate : public Model {
+public:
     void SpeakerSuccess(Agent &speaker, int m, int s);
 
     void SpeakerFailure(Agent &speaker, int m_s, int s, int m_l);
 
-    SpeakerSuccessIncrementFailureDecrement(int N, int M, int S, int inc, int dec);
+    void ListenerSuccess(Agent &listener, int m, int s);
 
-    SpeakerSuccessIncrementFailureDecrement();
+    MemorySpeakerBothListenerSuccessUpdate(int N, int M, int S, int m);
 
-    ~SpeakerSuccessIncrementFailureDecrement();
+    MemorySpeakerBothListenerSuccessUpdate();
+
+    ~MemorySpeakerBothListenerSuccessUpdate();
 };
 
 

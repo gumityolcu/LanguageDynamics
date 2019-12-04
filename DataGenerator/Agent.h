@@ -18,7 +18,7 @@ private:
     // Integer vectors for keeping track of sums of columns and rows
     std::vector<int> rowsums;
     std::vector<int> colsums;
-    // A vector of queues. In models that use memory structure, each queue represents the memory for a meaning
+    // A vector of queues. In models that use memory structure, each queue represents the memory for a meaning, the firs element in the queue being the oldest entry
     std::vector<std::queue<int>> memoryUpdateHistory;
     // The memory size. 0 if the model doesn't include memory
     int memory_size;

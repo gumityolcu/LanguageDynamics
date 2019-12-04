@@ -68,6 +68,25 @@ BothBothIncrement::~BothBothIncrement() {}
 
 //===================================================================
 
+SpeakerSuccessIncrementFailureDecrement::SpeakerSuccessIncrementFailureDecrement(int N, int M, int S, int inc, int dec)
+        : Model(N, M, S) {
+    this->increment = inc;
+    this->decrement = dec;
+    this->name = "SpeakerSuccessIncrementFailureDecrement";
+}
+
+void SpeakerSuccessIncrementFailureDecrement::SpeakerSuccess(Agent &speaker, int m, int s) {
+    speaker.setA(m, s, speaker.getA(m, s) + this->increment);
+}
+
+void SpeakerSuccessIncrementFailureDecrement::SpeakerFailure(Agent &speaker, int m_s, int s, int m_l) {
+    speaker.setA(m_l, s, std::max(0, speaker.getA(m_l, s) - this->decrement));
+}
+
+SpeakerSuccessIncrementFailureDecrement::~SpeakerSuccessIncrementFailureDecrement() {}
+
+//==============================================
+
 /* The model where:
  * The speaker updates memory_size according to the listener's action
  */
@@ -102,7 +121,6 @@ void MemoryBothBothUpdate::SpeakerFailure(Agent &speaker, int m_s, int s, int m_
     speaker.updateMemory(m_l, s);
 }
 
-
 void MemoryBothBothUpdate::ListenerSuccess(Agent &listener, int m, int s) {
     listener.updateMemory(m, s);
 }
@@ -116,18 +134,55 @@ MemoryBothBothUpdate::~MemoryBothBothUpdate() {}
 
 //===================================================================
 
-SpeakerSuccessIncrementFailureDecrement::SpeakerSuccessIncrementFailureDecrement(int N, int M, int S, int inc, int dec) : Model(N, M, S) {
-    this->increment = inc;
-    this->decrement = dec;
-    this->name = "SpeakerSuccessIncrementFailureDecrement";
+
+void MemorySpeakerSuccessUpdate::SpeakerSuccess(Agent &speaker, int m, int s) {
+    speaker.updateMemory(m, s);
 }
 
-void SpeakerSuccessIncrementFailureDecrement::SpeakerSuccess(Agent &speaker, int m, int s) {
-    speaker.setA(m, s, speaker.getA(m, s) + this->increment);
+MemorySpeakerSuccessUpdate::~MemorySpeakerSuccessUpdate() {};
+
+MemorySpeakerSuccessUpdate::MemorySpeakerSuccessUpdate(int N, int M, int S, int m) : Model(N, M, S, m) {
+    this->name = "MemorySpeakerSuccessUpdate";
 }
 
-void SpeakerSuccessIncrementFailureDecrement::SpeakerFailure(Agent &speaker, int m_s, int s, int m_l) {
-    speaker.setA(m_l, s, std::max(0, speaker.getA(m_l, s) - this->decrement));
+//===================================================================
+
+void MemorySpeakerSuccessListenerBothUpdate::SpeakerSuccess(Agent &speaker, int m, int s) {
+    speaker.updateMemory(m, s);
 }
 
-SpeakerSuccessIncrementFailureDecrement::~SpeakerSuccessIncrementFailureDecrement() {}
+void MemorySpeakerSuccessListenerBothUpdate::ListenerSuccess(Agent &listener, int m, int s) {
+    listener.updateMemory(m, s);
+}
+
+void MemorySpeakerSuccessListenerBothUpdate::ListenerFailure(Agent &listener, int m_s, int s, int m_l) {
+    listener.updateMemory(m_s, s);
+}
+
+MemorySpeakerSuccessListenerBothUpdate::~MemorySpeakerSuccessListenerBothUpdate() {};
+
+MemorySpeakerSuccessListenerBothUpdate::MemorySpeakerSuccessListenerBothUpdate(int N, int M, int S, int m) : Model(N, M, S, m)
+{
+    this->name = "MemorySpeakerSuccessListenerBothUpdate";
+}
+
+//===================================================================
+
+void MemorySpeakerBothListenerSuccessUpdate::SpeakerSuccess(Agent &speaker, int m, int s) {
+    speaker.updateMemory(m, s);
+}
+
+void MemorySpeakerBothListenerSuccessUpdate::SpeakerFailure(Agent &speaker, int m_s, int s, int m_l) {
+    speaker.updateMemory(m_l, s);
+}
+
+void MemorySpeakerBothListenerSuccessUpdate::ListenerSuccess(Agent &listener, int m, int s){
+    listener.updateMemory(m, s);
+}
+
+MemorySpeakerBothListenerSuccessUpdate::~MemorySpeakerBothListenerSuccessUpdate() {};
+
+MemorySpeakerBothListenerSuccessUpdate::MemorySpeakerBothListenerSuccessUpdate(int N, int M, int S, int m) : Model(N, M, S, m)
+{
+    this->name = "MemorySpeakerBothListenerSuccessUpdate";
+}
