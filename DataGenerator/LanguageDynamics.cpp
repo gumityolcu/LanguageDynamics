@@ -4,6 +4,44 @@
 
 #include "LanguageDynamics.h"
 
+
+BaseModel::BaseModel(int N, int M, int S, int speakerSucInc, int speakerFailInc, int speakerFailDec, int listenerSucInc, int listenerFailInc, int listenerFailDec) : Model(N, M, S) {
+    this->name = "BaseModel";
+    this->speakerSuccessInc=speakerSucInc;
+    this->speakerFailureInc=speakerFailInc;
+    this->speakerFailureDec=speakerFailDec;
+
+    this->listenerSuccessInc=listenerSucInc;
+    this->listenerFailureInc=listenerFailInc;
+    this->listenerFailureDec=listenerFailDec;
+}
+
+
+
+void BaseModel::SpeakerSuccess(Agent &speaker, int m, int s) {
+    speaker.setA(m, s, speaker.getA(m, s) + this->speakerSuccessInc);
+}
+
+void BaseModel::SpeakerFailure(Agent &speaker, int m_s, int s, int m_l) {
+    speaker.setA(m_s, s, std::max(0, speaker.getA(m_s, s) - this->speakerFailureDec));
+    speaker.setA(m_l, s, speaker.getA(m_l, s) + this->speakerFailureInc);
+}
+
+void BaseModel::ListenerSuccess(Agent &listener, int m, int s) {
+    listener.setA(m, s, listener.getA(m, s) + this->listenerSuccessInc);
+}
+
+void BaseModel::ListenerFailure(Agent &listener, int m_s, int s, int m_l){
+    listener.setA(m_l, s, std::max(0, listener.getA(m_l, s) - this->listenerFailureDec));
+    listener.setA(m_s, s, listener.getA(m_s, s) + this->listenerFailureInc);
+}
+
+
+
+//=============================
+
+
+
 // The model where speaker increments according to listener in both success and failure
 
 SpeakerBothIncrement::SpeakerBothIncrement(int N, int M, int S) : Model(N, M, S) {
@@ -102,62 +140,27 @@ BothBothIncrement::~BothBothIncrement() {}
 
 //===================================================================
 
-SpeakerSuccessIncrementFailureDecrement::SpeakerSuccessIncrementFailureDecrement(int N, int M, int S, int inc, int dec)
+
+SpeakerSuccessIncrementFailureIncrementDecrement::SpeakerSuccessIncrementFailureIncrementDecrement(int N, int M, int S, int sucInc, int failDec, int failInc)
         : Model(N, M, S) {
-    this->increment = inc;
-    this->decrement = dec;
-    this->name = "SpeakerSuccessIncrementFailureDecrement";
-}
-
-void SpeakerSuccessIncrementFailureDecrement::SpeakerSuccess(Agent &speaker, int m, int s) {
-    speaker.setA(m, s, speaker.getA(m, s) + this->increment);
-}
-
-void SpeakerSuccessIncrementFailureDecrement::SpeakerFailure(Agent &speaker, int m_s, int s, int m_l) {
-    speaker.setA(m_s, s, std::max(0, speaker.getA(m_s, s) - this->decrement));
-}
-
-SpeakerSuccessIncrementFailureDecrement::~SpeakerSuccessIncrementFailureDecrement() {}
-
-//===================================================================
-
-SpeakerSuccessIncrementFailureIncrementDecrement::SpeakerSuccessIncrementFailureIncrementDecrement(int N, int M, int S, int inc, int dec)
-        : Model(N, M, S) {
-    this->increment = inc;
-    this->decrement = dec;
-    this->name = "SpeakerSuccessIncrementFailureDecrement";
+    this->successIncrement = sucInc;
+    this->failureDecrement = failDec;
+    this->failureIncrement = failInc;
+    this->name = "SpeakerSuccessIncrementFailureIncrementDecrement";
 }
 
 void SpeakerSuccessIncrementFailureIncrementDecrement::SpeakerSuccess(Agent &speaker, int m, int s) {
-    speaker.setA(m, s, speaker.getA(m, s) + this->increment);
+    speaker.setA(m, s, speaker.getA(m, s) + this->successIncrement);
 }
 
 void SpeakerSuccessIncrementFailureIncrementDecrement::SpeakerFailure(Agent &speaker, int m_s, int s, int m_l) {
-    speaker.setA(m_s, s, std::max(0, speaker.getA(m_s, s) - this->decrement));
-    speaker.setA(m_l, s, speaker.getA(m_l, s) + this->increment);
+    speaker.setA(m_s, s, std::max(0, speaker.getA(m_s, s) - this->failureDecrement));
+    speaker.setA(m_l, s, speaker.getA(m_l, s) + this->failureIncrement);
 }
 
 SpeakerSuccessIncrementFailureIncrementDecrement::~SpeakerSuccessIncrementFailureIncrementDecrement() {}
 
 //===================================================================
-
-ListenerSuccessIncrementFailureDecrement::ListenerSuccessIncrementFailureDecrement(int N, int M, int S, int inc, int dec)
-        : Model(N, M, S) {
-    this->increment = inc;
-    this->decrement = dec;
-    this->name = "ListenerSuccessIncrementFailureDecrement";
-}
-
-void ListenerSuccessIncrementFailureDecrement::ListenerSuccess(Agent &listener, int m, int s) {
-    listener.setA(m, s, listener.getA(m, s) + this->increment);
-}
-
-void ListenerSuccessIncrementFailureDecrement::ListenerFailure(Agent &listener, int m_s, int s, int m_l) {
-    listener.setA(m_l, s, std::max(0, listener.getA(m_l, s) - this->decrement));
-}
-
-ListenerSuccessIncrementFailureDecrement::~ListenerSuccessIncrementFailureDecrement() {}
-//==============================================
 
 /* The model where:
  * The speaker updates memory according to the listener's action

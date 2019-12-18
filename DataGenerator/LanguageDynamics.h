@@ -18,6 +18,27 @@
  * Notice that this is not strict as there can be names like "SpeakerSuccessIncrementFailureDecrement" or "MemorySpeakerSuccessUpdateListenerSuccessUpdate"
  */
 
+class BaseModel: public Model{
+    int speakerSuccessInc;
+    int listenerSuccessInc;
+    int speakerFailureInc;
+    int speakerFailureDec;
+    int listenerFailureInc;
+    int listenerFailureDec;
+public:
+    void SpeakerSuccess(Agent &speaker, int m, int s);
+    void SpeakerFailure(Agent &speaker, int m_s, int s, int m_l);
+
+    void ListenerSuccess(Agent &listener, int m, int s);
+    void ListenerFailure(Agent &listener, int m_s, int s, int m_l);
+
+    BaseModel(int N, int M, int S, int speakerSucInc, int speakerFailInc, int speakerFailDec, int listenerSucInc, int listenerFailInc, int listenerFailDec);
+
+    BaseModel();
+
+    ~BaseModel();
+};
+
 class SpeakerBothIncrement : public Model {
 public:
     void SpeakerSuccess(Agent &speaker, int m, int s);
@@ -83,55 +104,22 @@ public:
     ~BothBothIncrement();
 };
 
-class SpeakerSuccessIncrementFailureDecrement : public Model {
-public:
-    int increment;
-    int decrement;
-
-    void SpeakerSuccess(Agent &speaker, int m, int s);
-
-    void SpeakerFailure(Agent &speaker, int m_s, int s, int m_l);
-
-    SpeakerSuccessIncrementFailureDecrement(int N, int M, int S, int inc, int dec);
-
-    SpeakerSuccessIncrementFailureDecrement();
-
-    ~SpeakerSuccessIncrementFailureDecrement();
-};
-
 class SpeakerSuccessIncrementFailureIncrementDecrement : public Model {
 public:
-    int increment;
-    int decrement;
+    int successIncrement;
+    int failureDecrement;
+    int failureIncrement;
 
     void SpeakerSuccess(Agent &speaker, int m, int s);
 
     void SpeakerFailure(Agent &speaker, int m_s, int s, int m_l);
 
-    SpeakerSuccessIncrementFailureIncrementDecrement(int N, int M, int S, int inc, int dec);
+    SpeakerSuccessIncrementFailureIncrementDecrement(int N, int M, int S, int sucInc, int failDec, int failInc);
 
     SpeakerSuccessIncrementFailureIncrementDecrement();
 
     ~SpeakerSuccessIncrementFailureIncrementDecrement();
 };
-
-
-class ListenerSuccessIncrementFailureDecrement : public Model {
-public:
-    int increment;
-    int decrement;
-
-    void ListenerSuccess(Agent &listener, int m, int s);
-
-    void ListenerFailure(Agent &listener, int m_s, int s, int m_l);
-
-    ListenerSuccessIncrementFailureDecrement(int N, int M, int S, int inc, int dec);
-
-    ListenerSuccessIncrementFailureDecrement();
-
-    ~ListenerSuccessIncrementFailureDecrement();
-};
-
 
 class ListenerSuccessIncrementFailureIncrementDecrement : public Model {
 public:
