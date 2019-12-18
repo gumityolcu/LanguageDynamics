@@ -42,6 +42,30 @@ public:
     ~SpeakerFailureIncrement();
 };
 
+class SpeakerSuccessIncrement : public Model {
+public:
+    void SpeakerSuccess(Agent &speaker, int m, int s);
+
+    SpeakerSuccessIncrement(int N, int M, int S);
+
+    SpeakerSuccessIncrement();
+
+    ~SpeakerSuccessIncrement();
+};
+
+class BothSuccessIncrement : public Model {
+public:
+    void SpeakerSuccess(Agent &speaker, int m, int s);
+
+    void ListenerSuccess(Agent &listener, int m, int s);
+
+    BothSuccessIncrement(int N, int M, int S);
+
+    BothSuccessIncrement();
+
+    ~BothSuccessIncrement();
+};
+
 class BothBothIncrement : public Model {
 public:
     void SpeakerSuccess(Agent &speaker, int m, int s);
@@ -75,6 +99,55 @@ public:
     ~SpeakerSuccessIncrementFailureDecrement();
 };
 
+class SpeakerSuccessIncrementFailureIncrementDecrement : public Model {
+public:
+    int increment;
+    int decrement;
+
+    void SpeakerSuccess(Agent &speaker, int m, int s);
+
+    void SpeakerFailure(Agent &speaker, int m_s, int s, int m_l);
+
+    SpeakerSuccessIncrementFailureIncrementDecrement(int N, int M, int S, int inc, int dec);
+
+    SpeakerSuccessIncrementFailureIncrementDecrement();
+
+    ~SpeakerSuccessIncrementFailureIncrementDecrement();
+};
+
+
+class ListenerSuccessIncrementFailureDecrement : public Model {
+public:
+    int increment;
+    int decrement;
+
+    void ListenerSuccess(Agent &listener, int m, int s);
+
+    void ListenerFailure(Agent &listener, int m_s, int s, int m_l);
+
+    ListenerSuccessIncrementFailureDecrement(int N, int M, int S, int inc, int dec);
+
+    ListenerSuccessIncrementFailureDecrement();
+
+    ~ListenerSuccessIncrementFailureDecrement();
+};
+
+
+class ListenerSuccessIncrementFailureIncrementDecrement : public Model {
+public:
+    int increment;
+    int decrement;
+
+    void ListenerSuccess(Agent &listener, int m, int s);
+
+    void ListenerFailure(Agent &listener, int m_s, int s, int m_l);
+
+    ListenerSuccessIncrementFailureIncrementDecrement(int N, int M, int S, int inc, int dec);
+
+    ListenerSuccessIncrementFailureIncrementDecrement();
+
+    ~ListenerSuccessIncrementFailureIncrementDecrement();
+};
 
 //Models including memory
 
@@ -89,6 +162,15 @@ public:
     MemorySpeakerBothUpdate();
 
     ~MemorySpeakerBothUpdate();
+};
+
+class MemorySpeakerSuccessUpdate : public Model {
+public:
+    void SpeakerSuccess(Agent &speaker, int m, int s);
+
+    MemorySpeakerSuccessUpdate(int N, int M, int S, int m);
+
+    ~MemorySpeakerSuccessUpdate();
 };
 
 class MemoryBothBothUpdate : public Model {
@@ -108,15 +190,6 @@ public:
     ~MemoryBothBothUpdate();
 };
 
-class MemorySpeakerSuccessUpdate : public Model {
-public:
-    void SpeakerSuccess(Agent &speaker, int m, int s);
-
-    MemorySpeakerSuccessUpdate(int N, int M, int S, int m);
-
-    ~MemorySpeakerSuccessUpdate();
-};
-
 class MemorySpeakerSuccessListenerBothUpdate : public Model {
 public:
     void SpeakerSuccess(Agent &speaker, int m, int s);
@@ -129,7 +202,6 @@ public:
 
     ~MemorySpeakerSuccessListenerBothUpdate();
 };
-
 
 class MemorySpeakerBothListenerSuccessUpdate : public Model {
 public:
