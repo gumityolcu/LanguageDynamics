@@ -3,37 +3,46 @@
 #include <vector>
 #include "LanguageDynamics.h"
 
-#define REALISATIONS 30
+#define REALISATIONS 5
+
 using namespace std;
 using namespace Eigen;
 
 double fitnessBetweenAgents(pair<MatrixXd, MatrixXd> m1, pair<MatrixXd, MatrixXd> m2);
 
-double populationFitness(vector<pair<MatrixXd, MatrixXd>> pop);
+double populationFitness(vector<pair<MatrixXd, MatrixXd>>
+
+                         pop);
 
 MatrixXd normalize(MatrixXi M);
 
-vector<pair<MatrixXd, MatrixXd>> generateMatrices(vector<MatrixXi> M);
+vector<pair<MatrixXd, MatrixXd>>
+generateMatrices(vector<MatrixXi>
+                 M);
 
 // DATA ANALYSER WILL BE A SEPERATE PROJECT!! ALL THIS IS FOR FAST DEBUGGING AND VERIFICATION
 int main() {
-    for (int i = 1; i < 31; i+=2) {
+    //for (int i = 1; i < 35; i += 1) {
         double score = 0;
+        vector<MatrixXi> pop;
         for (int rea = 0; rea < REALISATIONS; rea++) {
-            MemorySpeakerBothListenerSuccessUpdate model(10, 10, 10, i);
+            BaseModel model(10, 10, 10, 15,1,1,0,0,0);
             Simulation s(&model);
-            s.runForIterations(1000);
+            cout << "Realisation " << rea << endl;
+            s.runForIterations(1500);
             //s.saveState();
-            vector<MatrixXi> pop = s.getMatrices();
-            /*for (int i = 0; i < pop.size(); i++) {
-                cout << pop[i] << endl << endl << "=====" << endl << endl;
-            }*/
+            pop = s.getMatrices();
+
             score += populationFitness(generateMatrices(pop));
         }
+        //cout << "Memory " << i << " :   ";
+        for (int i = 0; i < pop.size(); i++) {
+            cout << pop[i] << endl << endl << "=====" << endl << endl;
+        }
         score = score / REALISATIONS;
-        cout << "Population score with memory " << i << " : " << score << endl << flush;
-
-    }
+        //cout << "Population score with memory " << i << " : " << score << endl << flush;
+        cout << "Population score : " << score << endl << flush;
+    //}
 
 }
 
@@ -67,7 +76,7 @@ double fitnessBetweenAgents(pair<MatrixXd, MatrixXd> m1, pair<MatrixXd, MatrixXd
     return fit;
 }
 
-double populationFitness(vector<pair<MatrixXd, MatrixXd>> pop) {
+double populationFitness(vector<pair<MatrixXd, MatrixXd >> pop) {
     double fitness = 0;
     int N = pop.size();
     for (int i = 0; i < N; i++) {
@@ -82,14 +91,27 @@ double populationFitness(vector<pair<MatrixXd, MatrixXd>> pop) {
     return fitness;
 }
 
-vector<pair<MatrixXd, MatrixXd>> generateMatrices(vector<MatrixXi> M) {
-    vector<pair<MatrixXd, MatrixXd>> ret;
-    for (int i = 0; i < M.size(); i++) {
+vector<pair<MatrixXd, MatrixXd>>
+generateMatrices(vector<MatrixXi>
+                 M) {
+    vector<pair<MatrixXd, MatrixXd>>
+            ret;
+    for (
+            int i = 0;
+            i < M.
+
+                    size();
+
+            i++) {
         pair<MatrixXd, MatrixXd> x;
-        x.first = normalize(M[i]);
-        x.second = normalize(M[i].transpose());
-        ret.emplace_back(x);
+        x.
+                first = normalize(M[i]);
+        x.
+                second = normalize(M[i].transpose());
+        ret.
+                emplace_back(x);
     }
-    return ret;
+    return
+            ret;
 }
 

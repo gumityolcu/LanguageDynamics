@@ -37,7 +37,7 @@ void BaseModel::ListenerFailure(Agent &listener, int m_s, int s, int m_l){
 }
 
 
-
+BaseModel::~BaseModel(){}
 //=============================
 
 
