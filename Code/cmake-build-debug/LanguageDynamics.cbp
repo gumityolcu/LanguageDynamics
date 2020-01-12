@@ -1,0 +1,179 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CodeBlocks_project_file>
+	<FileVersion major="1" minor="6"/>
+	<Project>
+		<Option title="LanguageDynamics"/>
+		<Option makefile_is_custom="1"/>
+		<Option compiler="gcc"/>
+		<Option virtualFolders="CMake Files\;"/>
+		<Build>
+			<Target title="all">
+				<Option working_dir="/home/rehrev/Documents/Okul/LanguageDynamics/Code/cmake-build-debug"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j4 -f &quot;/home/rehrev/Documents/Okul/LanguageDynamics/Code/cmake-build-debug/Makefile&quot;  VERBOSE=1 all"/>
+					<CompileFile command="/usr/bin/make -j4 -f &quot;/home/rehrev/Documents/Okul/LanguageDynamics/Code/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j4 -f &quot;/home/rehrev/Documents/Okul/LanguageDynamics/Code/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j4 -f &quot;/home/rehrev/Documents/Okul/LanguageDynamics/Code/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="rebuild_cache">
+				<Option working_dir="/home/rehrev/Documents/Okul/LanguageDynamics/Code/cmake-build-debug"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j4 -f &quot;/home/rehrev/Documents/Okul/LanguageDynamics/Code/cmake-build-debug/Makefile&quot;  VERBOSE=1 rebuild_cache"/>
+					<CompileFile command="/usr/bin/make -j4 -f &quot;/home/rehrev/Documents/Okul/LanguageDynamics/Code/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j4 -f &quot;/home/rehrev/Documents/Okul/LanguageDynamics/Code/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j4 -f &quot;/home/rehrev/Documents/Okul/LanguageDynamics/Code/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="edit_cache">
+				<Option working_dir="/home/rehrev/Documents/Okul/LanguageDynamics/Code/cmake-build-debug"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j4 -f &quot;/home/rehrev/Documents/Okul/LanguageDynamics/Code/cmake-build-debug/Makefile&quot;  VERBOSE=1 edit_cache"/>
+					<CompileFile command="/usr/bin/make -j4 -f &quot;/home/rehrev/Documents/Okul/LanguageDynamics/Code/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j4 -f &quot;/home/rehrev/Documents/Okul/LanguageDynamics/Code/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j4 -f &quot;/home/rehrev/Documents/Okul/LanguageDynamics/Code/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="DataGenerator">
+				<Option output="/home/rehrev/Documents/Okul/LanguageDynamics/Code/cmake-build-debug/DataGenerator" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/home/rehrev/Documents/Okul/LanguageDynamics/Code/cmake-build-debug"/>
+				<Option object_output="./"/>
+				<Option type="1"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="/home/rehrev/Documents/Yazilim/C++/eigen-eigen-b3f3d4950030"/>
+					<Add directory="/usr/include/c++/7"/>
+					<Add directory="/usr/include/x86_64-linux-gnu/c++/7"/>
+					<Add directory="/usr/include/c++/7/backward"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/7/include"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/7/include-fixed"/>
+					<Add directory="/usr/include/x86_64-linux-gnu"/>
+					<Add directory="/usr/include"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j4 -f &quot;/home/rehrev/Documents/Okul/LanguageDynamics/Code/cmake-build-debug/Makefile&quot;  VERBOSE=1 DataGenerator"/>
+					<CompileFile command="/usr/bin/make -j4 -f &quot;/home/rehrev/Documents/Okul/LanguageDynamics/Code/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j4 -f &quot;/home/rehrev/Documents/Okul/LanguageDynamics/Code/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j4 -f &quot;/home/rehrev/Documents/Okul/LanguageDynamics/Code/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="DataGenerator/fast">
+				<Option output="/home/rehrev/Documents/Okul/LanguageDynamics/Code/cmake-build-debug/DataGenerator" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/home/rehrev/Documents/Okul/LanguageDynamics/Code/cmake-build-debug"/>
+				<Option object_output="./"/>
+				<Option type="1"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="/home/rehrev/Documents/Yazilim/C++/eigen-eigen-b3f3d4950030"/>
+					<Add directory="/usr/include/c++/7"/>
+					<Add directory="/usr/include/x86_64-linux-gnu/c++/7"/>
+					<Add directory="/usr/include/c++/7/backward"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/7/include"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/7/include-fixed"/>
+					<Add directory="/usr/include/x86_64-linux-gnu"/>
+					<Add directory="/usr/include"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j4 -f &quot;/home/rehrev/Documents/Okul/LanguageDynamics/Code/cmake-build-debug/Makefile&quot;  VERBOSE=1 DataGenerator/fast"/>
+					<CompileFile command="/usr/bin/make -j4 -f &quot;/home/rehrev/Documents/Okul/LanguageDynamics/Code/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j4 -f &quot;/home/rehrev/Documents/Okul/LanguageDynamics/Code/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j4 -f &quot;/home/rehrev/Documents/Okul/LanguageDynamics/Code/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="DataAnalyser">
+				<Option output="/home/rehrev/Documents/Okul/LanguageDynamics/Code/cmake-build-debug/DataAnalyser" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/home/rehrev/Documents/Okul/LanguageDynamics/Code/cmake-build-debug"/>
+				<Option object_output="./"/>
+				<Option type="1"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="/home/rehrev/Documents/Yazilim/C++/eigen-eigen-b3f3d4950030"/>
+					<Add directory="/usr/include/c++/7"/>
+					<Add directory="/usr/include/x86_64-linux-gnu/c++/7"/>
+					<Add directory="/usr/include/c++/7/backward"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/7/include"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/7/include-fixed"/>
+					<Add directory="/usr/include/x86_64-linux-gnu"/>
+					<Add directory="/usr/include"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j4 -f &quot;/home/rehrev/Documents/Okul/LanguageDynamics/Code/cmake-build-debug/Makefile&quot;  VERBOSE=1 DataAnalyser"/>
+					<CompileFile command="/usr/bin/make -j4 -f &quot;/home/rehrev/Documents/Okul/LanguageDynamics/Code/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j4 -f &quot;/home/rehrev/Documents/Okul/LanguageDynamics/Code/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j4 -f &quot;/home/rehrev/Documents/Okul/LanguageDynamics/Code/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="DataAnalyser/fast">
+				<Option output="/home/rehrev/Documents/Okul/LanguageDynamics/Code/cmake-build-debug/DataAnalyser" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/home/rehrev/Documents/Okul/LanguageDynamics/Code/cmake-build-debug"/>
+				<Option object_output="./"/>
+				<Option type="1"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="/home/rehrev/Documents/Yazilim/C++/eigen-eigen-b3f3d4950030"/>
+					<Add directory="/usr/include/c++/7"/>
+					<Add directory="/usr/include/x86_64-linux-gnu/c++/7"/>
+					<Add directory="/usr/include/c++/7/backward"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/7/include"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/7/include-fixed"/>
+					<Add directory="/usr/include/x86_64-linux-gnu"/>
+					<Add directory="/usr/include"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j4 -f &quot;/home/rehrev/Documents/Okul/LanguageDynamics/Code/cmake-build-debug/Makefile&quot;  VERBOSE=1 DataAnalyser/fast"/>
+					<CompileFile command="/usr/bin/make -j4 -f &quot;/home/rehrev/Documents/Okul/LanguageDynamics/Code/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j4 -f &quot;/home/rehrev/Documents/Okul/LanguageDynamics/Code/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j4 -f &quot;/home/rehrev/Documents/Okul/LanguageDynamics/Code/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+		</Build>
+		<Unit filename="/home/rehrev/Documents/Okul/LanguageDynamics/Code/Agent.cpp">
+			<Option target="DataGenerator"/>
+			<Option target="DataAnalyser"/>
+		</Unit>
+		<Unit filename="/home/rehrev/Documents/Okul/LanguageDynamics/Code/Agent.h">
+			<Option target="DataGenerator"/>
+			<Option target="DataAnalyser"/>
+		</Unit>
+		<Unit filename="/home/rehrev/Documents/Okul/LanguageDynamics/Code/DataAnalyser/main.cpp">
+			<Option target="DataAnalyser"/>
+		</Unit>
+		<Unit filename="/home/rehrev/Documents/Okul/LanguageDynamics/Code/DataGenerator/main.cpp">
+			<Option target="DataGenerator"/>
+		</Unit>
+		<Unit filename="/home/rehrev/Documents/Okul/LanguageDynamics/Code/LanguageDynamics.cpp">
+			<Option target="DataGenerator"/>
+			<Option target="DataAnalyser"/>
+		</Unit>
+		<Unit filename="/home/rehrev/Documents/Okul/LanguageDynamics/Code/LanguageDynamics.h">
+			<Option target="DataGenerator"/>
+			<Option target="DataAnalyser"/>
+		</Unit>
+		<Unit filename="/home/rehrev/Documents/Okul/LanguageDynamics/Code/Model.cpp">
+			<Option target="DataGenerator"/>
+			<Option target="DataAnalyser"/>
+		</Unit>
+		<Unit filename="/home/rehrev/Documents/Okul/LanguageDynamics/Code/Model.h">
+			<Option target="DataGenerator"/>
+			<Option target="DataAnalyser"/>
+		</Unit>
+		<Unit filename="/home/rehrev/Documents/Okul/LanguageDynamics/Code/Simulation.cpp">
+			<Option target="DataGenerator"/>
+			<Option target="DataAnalyser"/>
+		</Unit>
+		<Unit filename="/home/rehrev/Documents/Okul/LanguageDynamics/Code/Simulation.h">
+			<Option target="DataGenerator"/>
+			<Option target="DataAnalyser"/>
+		</Unit>
+		<Unit filename="/home/rehrev/Documents/Okul/LanguageDynamics/Code/CMakeLists.txt">
+			<Option virtualFolder="CMake Files\"/>
+		</Unit>
+	</Project>
+</CodeBlocks_project_file>

@@ -1,0 +1,4 @@
+/home/rehrev/Documents/Okul/LanguageDynamics/Code/cmake-build-debug/CMakeFiles/rebuild_cache.dir
+/home/rehrev/Documents/Okul/LanguageDynamics/Code/cmake-build-debug/CMakeFiles/edit_cache.dir
+/home/rehrev/Documents/Okul/LanguageDynamics/Code/cmake-build-debug/CMakeFiles/DataGenerator.dir
+/home/rehrev/Documents/Okul/LanguageDynamics/Code/cmake-build-debug/CMakeFiles/DataAnalyser.dir
