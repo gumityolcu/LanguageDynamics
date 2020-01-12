@@ -14,6 +14,9 @@ BaseModel::BaseModel(int N, int M, int S, int speakerSucInc, int speakerFailInc,
     this->listenerSuccessInc=listenerSucInc;
     this->listenerFailureInc=listenerFailInc;
     this->listenerFailureDec=listenerFailDec;
+
+    this->paramsString="SSI="+std::to_string(this->speakerSuccessInc)+"|SFI="+std::to_string(this->speakerFailureInc)+"|SFD="+std::to_string(this->speakerFailureDec)+"|LSI="+std::to_string(this->listenerSuccessInc)+"|LFI="+std::to_string(this->listenerFailureInc)+"|LFD="+std::to_string(this->listenerFailureDec)+"|";
+
 }
 
 
@@ -35,7 +38,6 @@ void BaseModel::ListenerFailure(Agent &listener, int m_s, int s, int m_l){
     listener.setA(m_l, s, std::max(0, listener.getA(m_l, s) - this->listenerFailureDec));
     listener.setA(m_s, s, listener.getA(m_s, s) + this->listenerFailureInc);
 }
-
 
 BaseModel::~BaseModel(){}
 //=============================

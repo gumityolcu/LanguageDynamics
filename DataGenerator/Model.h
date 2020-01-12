@@ -11,6 +11,7 @@ protected:
     int S; // # of symbols
     int memory_size; // memory size
     std::vector<Agent> agents;
+    std::string paramsString = ""; // Used for output file name, should be updated by child class if additional parameters are used
     std::string name = "plain"; // Used for output file name
     std::vector<std::pair<int, int>> combinations; // Holds N*(N-1) combinations of agents. Randomly sampled to select interacting pairs
     std::default_random_engine rnd; // Random engine
@@ -27,6 +28,7 @@ protected:
     virtual void SpeakerFailure(Agent &speaker, int m_s, int s, int m_l);
 
     virtual void ListenerFailure(Agent &listener, int m_s, int s, int m_l);
+
 
 public:
     int getN(); // Returns the # of agents

@@ -39,8 +39,8 @@ void Model::ListenerFailure(Agent &listener, int m_s, int s, int m_l) { return; 
 
 std::string Model::toStr() {
     std::string ret = "";
-    ret += this->name + "|" + std::to_string(this->N) + "|" + std::to_string(this->M) + "|" + std::to_string(this->S) +
-           "|" + std::to_string(this->memory_size);
+    ret += this->name + "|N=" + std::to_string(this->N) + "|M=" + std::to_string(this->M) + "|S=" + std::to_string(this->S) +
+           "|m=" + std::to_string(this->memory_size)+"|"+this->paramsString;
     return ret;
 }
 

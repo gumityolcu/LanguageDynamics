@@ -32,6 +32,7 @@ public:
     void ListenerSuccess(Agent &listener, int m, int s);
     void ListenerFailure(Agent &listener, int m_s, int s, int m_l);
 
+
     BaseModel(int N, int M, int S, int speakerSucInc, int speakerFailInc, int speakerFailDec, int listenerSucInc, int listenerFailInc, int listenerFailDec);
 
     BaseModel();

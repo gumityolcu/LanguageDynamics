@@ -5,10 +5,12 @@
 
 class Simulation {
 private:
-    // A simulations consists of the state of a model m after T iterations
+    // A simulations consists of the state of a model m after T iterations at the REALISATION th realisation
     // This class is really a wrapper for easy IO
     int T;
-    Model *m= nullptr;
+    int REALISATION;
+    std::string savePath="";
+    Model *m = nullptr;
 
 public:
     Simulation();
@@ -18,8 +20,11 @@ public:
     ~Simulation();
 
     void runForIterations(int IT);
+    void runForRealisations(int IT, int RE, bool save=true);
 
-    void saveState(std::string path="");
+    void setSavePath(std::string path);
+
+    void saveState();
 
     std::vector<Eigen::MatrixXi> getMatrices(); // For score calculation
     void loadState(std::string path);

@@ -25,21 +25,16 @@ int main() {
     //for (int i = 1; i < 35; i += 1) {
         double score = 0;
         vector<MatrixXi> pop;
-        for (int rea = 0; rea < REALISATIONS; rea++) {
-            BaseModel model(10, 10, 10, 15,1,1,0,0,0);
-            Simulation s(&model);
-            cout << "Realisation " << rea << endl;
-            s.runForIterations(1500);
-            //s.saveState();
-            pop = s.getMatrices();
+        BaseModel model(10, 10, 10, 15,1,1,0,0,0);
+        Simulation s(&model);
+        s.runForRealisations(1500,1);
+        pop = s.getMatrices();
 
-            score += populationFitness(generateMatrices(pop));
-        }
+        score += populationFitness(generateMatrices(pop));
         //cout << "Memory " << i << " :   ";
         for (int i = 0; i < pop.size(); i++) {
             cout << pop[i] << endl << endl << "=====" << endl << endl;
         }
-        score = score / REALISATIONS;
         //cout << "Population score with memory " << i << " : " << score << endl << flush;
         cout << "Population score : " << score << endl << flush;
     //}
