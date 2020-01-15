@@ -23,19 +23,19 @@ generateMatrices(vector<MatrixXi>
 // DATA ANALYSER WILL BE A SEPERATE PROJECT!! ALL THIS IS FOR FAST DEBUGGING AND VERIFICATION
 int main() {
     //for (int i = 1; i < 35; i += 1) {
-        double score = 0;
-        vector<MatrixXi> pop;
-        BaseModel model(10, 10, 10, 15,1,1,0,0,0);
-        Simulation s(&model);
-        s.runForRealisations(1500,1, false);
-        pop = s.getMatrices();
+    double score = 0;
+    vector<MatrixXi> pop;
+    BaseModel model(10, 10, 10, 15, 1, 1, 0, 0, 0);
+    Simulation s(&model);
+    s.runForRealisations(1500, 1, true);
+    pop = s.getMatrices();
 
-        score += populationFitness(generateMatrices(pop));
-        for (int i = 0; i < pop.size(); i++) {
-            cout << pop[i] << endl << endl << "=====" << endl << endl;
-        }
-        cout << "Population score : " << score << endl << flush;
-
+    score += populationFitness(generateMatrices(pop));
+    for (int i = 0; i < pop.size(); i++) {
+        cout << pop[i] << endl << endl << "=====" << endl << endl;
+    }
+    cout << "Population score : " << score << endl << flush;
+    return score;
 }
 
 MatrixXd normalize(MatrixXi M) {

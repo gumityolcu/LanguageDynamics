@@ -46,11 +46,11 @@ void Simulation::saveState() {
     std::string fname = this->savePath;
     if (fname == "") {
         fname = this->m->toStr() + "T=" + std::to_string(this->T) + "|REALISATION=" +
-                std::to_string(this->REALISATION) + ".txt";
+                std::to_string(this->REALISATION);
     }
     std::ofstream file;
     file.open(fname);
-    file << this->T << " " << this->m->getN() << " " << this->m->getM() << " " << this->m->getS() << " ";
+    file << this->T << " " << this->REALISATION<<" "<<this->m->getN() << " " << this->m->getM() << " " << this->m->getS() << " ";
     for (int i = 0; i < this->m->getN(); i++) {
         file << this->m->getAgent(i);
         if (i < this->m->getN() - 1) {

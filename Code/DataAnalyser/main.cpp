@@ -21,24 +21,20 @@ generateMatrices(vector<MatrixXi>
                  M);
 
 // DATA ANALYSER WILL BE A SEPERATE PROJECT!! ALL THIS IS FOR FAST DEBUGGING AND VERIFICATION
-int main() {
+int main(int argc, char** argv) {
     //for (int i = 1; i < 35; i += 1) {
-        double score = 0;
-        vector<MatrixXi> pop;
-        BaseModel model(10, 10, 10, 15,1,1,0,0,0);
-        Simulation s(&model);
-        s.runForRealisations(1500,1);
-        pop = s.getMatrices();
-
+    double score = 0;
+    vector<MatrixXi> pop;
+    BaseModel model(10, 10, 10, 15,1,1,0,0,0);
+    for(int s=1;s<argc;s++)
+    {
+        Simulation sim(&model);
+        sim.loadState(argv[s]);
+        pop = sim.getMatrices();
         score += populationFitness(generateMatrices(pop));
-        //cout << "Memory " << i << " :   ";
-        for (int i = 0; i < pop.size(); i++) {
-            cout << pop[i] << endl << endl << "=====" << endl << endl;
-        }
-        //cout << "Population score with memory " << i << " : " << score << endl << flush;
-        cout << "Population score : " << score << endl << flush;
-    //}
-
+    }
+    cout << score << endl << flush;
+    return score;
 }
 
 MatrixXd normalize(MatrixXi M) {
@@ -86,27 +82,14 @@ double populationFitness(vector<pair<MatrixXd, MatrixXd >> pop) {
     return fitness;
 }
 
-vector<pair<MatrixXd, MatrixXd>>
-generateMatrices(vector<MatrixXi>
-                 M) {
-    vector<pair<MatrixXd, MatrixXd>>
-            ret;
-    for (
-            int i = 0;
-            i < M.
-
-                    size();
-
-            i++) {
+vector<pair<MatrixXd, MatrixXd>> generateMatrices(vector<MatrixXi> M) {
+    vector<pair<MatrixXd, MatrixXd>> ret;
+    for (int i = 0;i < M.size();i++) {
         pair<MatrixXd, MatrixXd> x;
-        x.
-                first = normalize(M[i]);
-        x.
-                second = normalize(M[i].transpose());
-        ret.
-                emplace_back(x);
+        x.first = normalize(M[i]);
+        x.second = normalize(M[i].transpose());
+        ret.emplace_back(x);
     }
-    return
-            ret;
+    return ret;
 }
 
