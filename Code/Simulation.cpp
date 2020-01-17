@@ -19,11 +19,13 @@ void Simulation::runForIterations(int IT) {
     }
 }
 
-void Simulation::runForRealisations(int IT, int RE, bool save) {
+void Simulation::runForRealisations(int IT, int RE, bool save, int initRE) {
+    this->REALISATION = initRE;
     for (int i = 0; i < RE; i++) {
         this->T = 0;
         this->REALISATION++;
         this->runForIterations(IT);
+
         if (save) {
             this->saveState();
         }
@@ -44,20 +46,24 @@ std::vector<Eigen::MatrixXi> Simulation::getMatrices() {
 
 void Simulation::saveState() {
     std::string fname = this->savePath;
-    if (fname == "") {
-        fname = this->m->toStr() + "T=" + std::to_string(this->T) + "|REALISATION=" +
-                std::to_string(this->REALISATION);
-    }
+
+    fname += this->m->toStr() + "T=" + std::to_string(this->T) + "|REALISATION=" +
+             std::to_string(this->REALISATION);
     std::ofstream file;
-    file.open(fname);
-    file << this->T << " " << this->REALISATION<<" "<<this->m->getN() << " " << this->m->getM() << " " << this->m->getS() << " ";
+    file.open(fname, std::ios::out | std::ios::binary);
+    file.write((char *) &(this->T), sizeof(int));
+    file.write((char *) &(this->REALISATION), sizeof(int));
+    int wrN = this->m->getN();
+    int wrM = this->m->getM();
+    int wrS = this->m->getS();
+    file.write((char *) &(wrN), sizeof(int));
+    file.write((char *) &(wrM), sizeof(int));
+    file.write((char *) &(wrS), sizeof(int));
     for (int i = 0; i < this->m->getN(); i++) {
         file << this->m->getAgent(i);
-        if (i < this->m->getN() - 1) {
-            file << " ";
-        }
     }
-    file << " END";
+    int END=-1;
+    file.write((char*)&END,sizeof(int));
     file.close();
 }
 
@@ -66,17 +72,27 @@ void Simulation::loadState(std::string path) {
         throw std::runtime_error("Simulation object should have a model before loading");
     } else {
         int N, M, S;
-        std::ifstream file(path);
-        file >> this->T >> this->REALISATION >> N >> M >> S;
-        for (int a = 0; a < N; a++) {
-            for (int r = 0; r < M; r++) {
-                for (int c = 0; c < S; c++) {
-                    int val;
-                    file >> val;
-                    this->m->getAgent(a).setA(r, c, val);
+        std::ifstream file(this->savePath + path, std::ios::in | std::ios::binary);
+        if (!file) {
+            throw std::runtime_error("No such file : " + path);
+        } else {
+            file.read((char *) &this->T, sizeof(int));
+            file.read((char *) &this->REALISATION, sizeof(int));
+            file.read((char *) &N, sizeof(int));
+            file.read((char *) &M, sizeof(int));
+            file.read((char *) &S, sizeof(int));
+
+            for (int a = 0; a < N; a++) {
+                for (int r = 0; r < M; r++) {
+                    for (int c = 0; c < S; c++) {
+                        int val;
+                        file.read((char *) &val, sizeof(int));
+                        this->m->getAgent(a).setA(r, c, val);
+                    }
                 }
             }
+            file.close();
         }
-        file.close();
+
     }
 }

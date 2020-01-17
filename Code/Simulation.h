@@ -20,7 +20,7 @@ public:
     ~Simulation();
 
     void runForIterations(int IT);
-    void runForRealisations(int IT, int RE, bool save=true);
+    void runForRealisations(int IT, int RE, bool save=true, int initRE=0);
 
     void setSavePath(std::string path);
 
