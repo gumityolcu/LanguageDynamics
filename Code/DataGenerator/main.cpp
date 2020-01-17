@@ -3,7 +3,7 @@
 #include <vector>
 #include "../LanguageDynamics.h"
 
-#define REALISATIONS 5
+#define REALISATIONS 50
 
 using namespace std;
 using namespace Eigen;
@@ -22,16 +22,17 @@ generateMatrices(vector<MatrixXi>
 
 // DATA ANALYSER WILL BE A SEPERATE PROJECT!! ALL THIS IS FOR FAST DEBUGGING AND VERIFICATION
 int main() {
-    for (int j=1;j<2;j++)
+    for (int j=0;j<11;j++)
     {
-        for (int i = 15; i < 16; i += 5) {
+        for (int i = 0; i < 55; i += 5) {
             double score = 0;
             vector<MatrixXi> pop;
             BaseModel model(10, 10, 10, i, j, 1, 0, 0, 0);
             Simulation s(&model);
             s.setSavePath("/home/rehrev/Documents/Okul/LanguageDynamics/Code/Data/");
-            s.runForRealisations(1500, 1, true);
-            cout<<j<<" "<<i<<endl;
+            cout<<j<<" "<<i<<": ";
+            s.runForRealisations(1500, REALISATIONS, true);
+            cout<<endl;
         }
     }
     return 5;

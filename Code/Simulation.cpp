@@ -23,6 +23,7 @@ void Simulation::runForRealisations(int IT, int RE, bool save) {
     for (int i = 0; i < RE; i++) {
         this->T = 0;
         this->REALISATION++;
+        std::cout<<this->REALISATION;
         this->runForIterations(IT);
         if (save) {
             this->saveState();
