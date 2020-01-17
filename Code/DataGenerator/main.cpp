@@ -22,20 +22,19 @@ generateMatrices(vector<MatrixXi>
 
 // DATA ANALYSER WILL BE A SEPERATE PROJECT!! ALL THIS IS FOR FAST DEBUGGING AND VERIFICATION
 int main() {
-    //for (int i = 1; i < 35; i += 1) {
-    double score = 0;
-    vector<MatrixXi> pop;
-    BaseModel model(10, 10, 10, 15, 1, 1, 0, 0, 0);
-    Simulation s(&model);
-    s.runForRealisations(1500, 1, true);
-    pop = s.getMatrices();
-
-    score += populationFitness(generateMatrices(pop));
-    for (int i = 0; i < pop.size(); i++) {
-        cout << pop[i] << endl << endl << "=====" << endl << endl;
+    for (int j=1;j<2;j++)
+    {
+        for (int i = 15; i < 16; i += 5) {
+            double score = 0;
+            vector<MatrixXi> pop;
+            BaseModel model(10, 10, 10, i, j, 1, 0, 0, 0);
+            Simulation s(&model);
+            s.setSavePath("/home/rehrev/Documents/Okul/LanguageDynamics/Code/Data/");
+            s.runForRealisations(1500, 1, true);
+            cout<<j<<" "<<i<<endl;
+        }
     }
-    cout << "Population score : " << score << endl << flush;
-    return score;
+    return 5;
 }
 
 MatrixXd normalize(MatrixXi M) {
