@@ -23,7 +23,7 @@ void Simulation::runForRealisations(int IT, int RE, bool save) {
     for (int i = 0; i < RE; i++) {
         this->T = 0;
         this->REALISATION++;
-        std::cout<<this->REALISATION;
+        std::cout<<this->REALISATION<<" "<<std::flush;
         this->runForIterations(IT);
         if (save) {
             this->saveState();
@@ -67,7 +67,7 @@ void Simulation::loadState(std::string path) {
         throw std::runtime_error("Simulation object should have a model before loading");
     } else {
         int N, M, S;
-        std::ifstream file(path);
+        std::ifstream file(this->savePath+path);
         file >> this->T >> this->REALISATION >> N >> M >> S;
         for (int a = 0; a < N; a++) {
             for (int r = 0; r < M; r++) {
