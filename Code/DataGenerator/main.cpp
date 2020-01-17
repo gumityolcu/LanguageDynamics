@@ -20,7 +20,6 @@ vector<pair<MatrixXd, MatrixXd>>
 generateMatrices(vector<MatrixXi>
                  M);
 
-// DATA ANALYSER WILL BE A SEPERATE PROJECT!! ALL THIS IS FOR FAST DEBUGGING AND VERIFICATION
 int main() {
     for (int j=0;j<11;j++)
     {

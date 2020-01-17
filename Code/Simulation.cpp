@@ -23,7 +23,7 @@ void Simulation::runForRealisations(int IT, int RE, bool save) {
     for (int i = 0; i < RE; i++) {
         this->T = 0;
         this->REALISATION++;
-        std::cout<<this->REALISATION<<" "<<std::flush;
+        std::cout << this->REALISATION << " " << std::flush;
         this->runForIterations(IT);
         if (save) {
             this->saveState();
@@ -45,13 +45,12 @@ std::vector<Eigen::MatrixXi> Simulation::getMatrices() {
 
 void Simulation::saveState() {
     std::string fname = this->savePath;
-    if (fname == "") {
-        fname = this->m->toStr() + "T=" + std::to_string(this->T) + "|REALISATION=" +
+    fname += this->m->toStr() + "T=" + std::to_string(this->T) + "|REALISATION=" +
                 std::to_string(this->REALISATION);
-    }
     std::ofstream file;
     file.open(fname);
-    file << this->T << " " << this->REALISATION<<" "<<this->m->getN() << " " << this->m->getM() << " " << this->m->getS() << " ";
+    file << this->T << " " << this->REALISATION << " " << this->m->getN() << " " << this->m->getM() << " "
+         << this->m->getS() << " ";
     for (int i = 0; i < this->m->getN(); i++) {
         file << this->m->getAgent(i);
         if (i < this->m->getN() - 1) {
@@ -67,17 +66,21 @@ void Simulation::loadState(std::string path) {
         throw std::runtime_error("Simulation object should have a model before loading");
     } else {
         int N, M, S;
-        std::ifstream file(this->savePath+path);
-        file >> this->T >> this->REALISATION >> N >> M >> S;
-        for (int a = 0; a < N; a++) {
-            for (int r = 0; r < M; r++) {
-                for (int c = 0; c < S; c++) {
-                    int val;
-                    file >> val;
-                    this->m->getAgent(a).setA(r, c, val);
+        std::ifstream file(this->savePath + path);
+        if (!file) {
+            throw std::runtime_error("Can not find file " + this->savePath + path);
+        } else {
+            file >> this->T >> this->REALISATION >> N >> M >> S;
+            for (int a = 0; a < N; a++) {
+                for (int r = 0; r < M; r++) {
+                    for (int c = 0; c < S; c++) {
+                        int val;
+                        file >> val;
+                        this->m->getAgent(a).setA(r, c, val);
+                    }
                 }
             }
+            file.close();
         }
-        file.close();
     }
 }
