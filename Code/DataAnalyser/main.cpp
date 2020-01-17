@@ -20,21 +20,20 @@ vector<pair<MatrixXd, MatrixXd>>
 generateMatrices(vector<MatrixXi>
                  M);
 
-// DATA ANALYSER WILL BE A SEPERATE PROJECT!! ALL THIS IS FOR FAST DEBUGGING AND VERIFICATION
 int main(int argc, char** argv) {
     //for (int i = 1; i < 35; i += 1) {
     double score = 0;
     vector<MatrixXi> pop;
     BaseModel model(10, 10, 10, 15,1,1,0,0,0);
-    for(int s=1;s<argc;s++)
+    if(argc==2)
     {
         Simulation sim(&model);
-        sim.loadState(argv[s]);
+        sim.loadState(argv[1]);
         pop = sim.getMatrices();
         score += populationFitness(generateMatrices(pop));
     }
     cout << score << endl << flush;
-    return score;
+    return 0;
 }
 
 MatrixXd normalize(MatrixXi M) {
