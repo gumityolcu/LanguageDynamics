@@ -3,8 +3,13 @@
 #include <vector>
 #include "../LanguageDynamics.h"
 
-#define REALISATIONS 50
-
+#define REALISATIONS 2
+#define COLS 30
+#define ROWS 30
+#define COLSTEP 1
+#define ROWSTEP 100
+#define COLINIT 1
+#define ROWINIT 100
 using namespace std;
 using namespace Eigen;
 
@@ -21,17 +26,16 @@ generateMatrices(vector<MatrixXi>
                  M);
 
 int main() {
-    for (int j=0;j<11;j++)
-    {
-        for (int i = 0; i < 55; i += 5) {
-            double score = 0;
-            vector<MatrixXi> pop;
-            BaseModel model(10, 10, 10, i, j, 1, 0, 0, 0);
+    for (int r = 1; r < REALISATIONS+1; r++) {
+        for (int i = COLINIT; i < COLS * COLSTEP + COLINIT; i = i + COLSTEP) {
+            MemorySpeakerSuccessUpdate model(10, 10, 10, i);
             Simulation s(&model);
+            s.setRealisation(r);
             s.setSavePath("/home/rehrev/Documents/Okul/LanguageDynamics/Code/Data/");
-            cout<<j<<" "<<i<<": ";
-            s.runForRealisations(1500, REALISATIONS, true);
-            cout<<endl;
+            for (int j = ROWINIT; j < ROWS * ROWSTEP + ROWINIT; j = j + ROWSTEP) {
+                s.runForIterations(100);
+                s.saveState();
+            }
         }
     }
     return 5;

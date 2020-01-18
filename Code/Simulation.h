@@ -21,7 +21,7 @@ public:
 
     void runForIterations(int IT);
     void runForRealisations(int IT, int RE, bool save=true);
-
+    void setRealisation(int val);
     void setSavePath(std::string path);
 
     void saveState();

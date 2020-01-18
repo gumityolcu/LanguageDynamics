@@ -43,6 +43,11 @@ std::vector<Eigen::MatrixXi> Simulation::getMatrices() {
     return ret;
 }
 
+void Simulation::setRealisation(int val)
+{
+    this->REALISATION=val;
+}
+
 void Simulation::saveState() {
     std::string fname = this->savePath;
     fname += this->m->toStr() + "T=" + std::to_string(this->T) + "|REALISATION=" +

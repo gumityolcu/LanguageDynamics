@@ -20,6 +20,24 @@ random
 iostream
 -
 
+/home/rehrev/Documents/Okul/LanguageDynamics/Code/DataGenerator/main.cpp
+iostream
+-
+random
+-
+vector
+-
+../LanguageDynamics.h
+/home/rehrev/Documents/Okul/LanguageDynamics/Code/LanguageDynamics.h
+
+/home/rehrev/Documents/Okul/LanguageDynamics/Code/LanguageDynamics.cpp
+LanguageDynamics.h
+/home/rehrev/Documents/Okul/LanguageDynamics/Code/LanguageDynamics.h
+
+/home/rehrev/Documents/Okul/LanguageDynamics/Code/LanguageDynamics.h
+Simulation.h
+/home/rehrev/Documents/Okul/LanguageDynamics/Code/Simulation.h
+
 /home/rehrev/Documents/Okul/LanguageDynamics/Code/Model.h
 Agent.h
 /home/rehrev/Documents/Okul/LanguageDynamics/Code/Agent.h
